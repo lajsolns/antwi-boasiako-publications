@@ -1,0 +1,886 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+/* Publications Theme - Completely separate from main site */
+.publications-wrapper {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.publications-body {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-playfair-italic {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Header Styles */
+.publications-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Top Bar - Search, Logo, Cart */
+.publications-top-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 140px;
+}
+
+.publications-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+.publications-logo img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Cart Button Styling */
+.publications-top-bar .relative {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.publications-top-bar button[aria-label="Open cart"] {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151; /* Gray-700 for Salt Publishing look */
+}
+
+.publications-top-bar button[aria-label="Open cart"]:hover {
+  background-color: #f3f4f6; /* Light gray hover */
+}
+
+/* Cart badge styling */
+.publications-top-bar button[aria-label="Open cart"] .absolute {
+  background-color: #111827; /* Gray-900 for badge */
+  color: #ffffff;
+  border: none;
+}
+
+/* Navigation Bar - Centered Below Logo */
+.publications-nav-bar {
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+
+.publications-nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.publications-nav-links a {
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 4px 0;
+}
+
+.publications-nav-links a:hover {
+  color: #111827;
+}
+
+/* Salt Publishing style underline hover effect */
+.publications-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #111827;
+  transition: width 0.3s ease;
+}
+
+.publications-nav-links a:hover::after {
+  width: 100%;
+}
+
+/* New Release Section - Exact Salt Publishing Copy */
+.publications-new-release {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.publications-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.publications-new-release-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.publications-new-release-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.publications-new-release-subtitle h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0.5rem 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.publications-new-release-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Featured Book */
+.publications-featured-book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.publications-book-image {
+  width: 264px;
+  height: 400px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publications-book-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.publications-book-info {
+  max-width: 320px;
+}
+
+.publications-book-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.2;
+}
+
+.publications-book-author {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+.publications-book-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.publications-book-btn {
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.publications-book-btn:hover {
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+/* Book Details Section */
+.publications-book-details {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.publications-add-to-cart-btn {
+  width: 100%;
+  min-height: 56px;
+  background: #ffffff;
+  color: #f97316;
+  border: 2px solid #f97316;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.publications-add-to-cart-btn:hover {
+  background: #f97316;
+  color: #ffffff;
+}
+
+.publications-product-author {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.publications-product-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.05;
+  margin: 0 0 1.25rem;
+}
+
+.publications-product-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.publications-product-vat {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.publications-product-shoppay {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.publications-shoppay-badge {
+  display: inline-block;
+  background: #5b21b6;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px 0 0 4px;
+  margin: 0 0 0 0.4rem;
+}
+
+.publications-shoppay-badge-2 {
+  display: inline-block;
+  background: #5b21b6;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0 4px 4px 0;
+  margin-right: 0.5rem;
+}
+
+.publications-shoppay-link {
+  color: #6b7280;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+.publications-product-section {
+  margin-top: 1.5rem;
+}
+
+.publications-product-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.publications-format-pill {
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.publications-qty-stepper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 200px;
+  border: 1px solid #d1d5db;
+}
+
+.publications-qty-btn {
+  background: #ffffff;
+  border: none;
+  padding: 0.85rem 0;
+  font-size: 1.25rem;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.publications-qty-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #111827;
+  border-left: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+}
+
+.publications-buy-with-shop-btn {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 1rem;
+  background: #5b21b6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(17, 24, 39, 0.18);
+}
+
+.publications-buy-with-shop-strong {
+  font-weight: 800;
+}
+
+.publications-more-payment {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #6b7280;
+  text-decoration: underline;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+}
+
+.publications-product-description {
+  margin-top: 1.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+/* Responsive Design for Book Details */
+@media (max-width: 768px) {
+  .publications-new-release-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .publications-featured-book {
+    order: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .publications-book-details {
+    order: 2;
+    padding-left: 0;
+    gap: 0;
+  }
+
+  .publications-product-title {
+    font-size: 2.25rem;
+  }
+
+  .publications-qty-stepper {
+    max-width: 100%;
+  }
+}
+
+/* Responsive Design for New Release */
+@media (max-width: 768px) {
+  .publications-new-release {
+    padding: 2rem 1rem;
+  }
+
+  .publications-new-release-title {
+    font-size: 2rem;
+  }
+
+  .publications-new-release-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .publications-featured-book {
+    order: 2;
+  }
+
+  .publications-coming-soon {
+    order: 1;
+    padding-left: 0;
+  }
+
+  .publications-book-image {
+    width: 240px;
+    height: 360px;
+  }
+
+  .publications-coming-soon-grid {
+    gap: 1.25rem;
+  }
+
+  .publications-coming-book {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .publications-coming-book-image {
+    width: 120px;
+    height: 180px;
+    margin-bottom: 1rem;
+  }
+
+  .publications-coming-book-info {
+    min-height: auto;
+    text-align: center;
+  }
+
+  .publications-coming-badge {
+    align-self: center;
+  }
+}
+.publications-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.publications-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.publications-hero .tagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Book Grid */
+.publications-books-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.publications-book-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.publications-book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.publications-book-cover {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  background: #f8f9fa;
+}
+
+.publications-book-info {
+  padding: 1.5rem;
+}
+
+.publications-book-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.publications-book-author {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.publications-book-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.publications-book-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Section Headers */
+.publications-section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.publications-section-header h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.publications-section-header p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.125rem;
+  color: #666;
+}
+
+/* Featured Section */
+.publications-featured {
+  background: #f8f9fa;
+  padding: 4rem 2rem;
+}
+
+.publications-featured-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Call to Action */
+.publications-cta {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.publications-cta h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.publications-cta p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.publications-btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.publications-btn:hover {
+  background: #f8f9fa;
+  color: #1a1a1a;
+}
+
+/* Footer */
+.publications-footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  padding: 2rem;
+  text-align: center;
+}
+
+.publications-footer p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .publications-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .publications-top-bar {
+    padding: 1rem;
+    height: 100px;
+  }
+
+  .publications-logo img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .publications-nav-bar {
+    padding: 0.5rem 0;
+    display: none;
+  }
+  
+  .publications-nav-bar.mobile-open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .publications-nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+  }
+  
+  .publications-nav-links a {
+    font-size: 0.75rem;
+    padding: 8px 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .publications-nav-links a::after {
+    bottom: 2px;
+  }
+
+  .publications-nav-links li {
+    text-align: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+
+  .publications-nav-links li:last-child {
+    border-bottom: none;
+  }
+  
+  .publications-books-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+  
+  .publications-featured-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Show navigation bar on desktop */
+  .publications-nav-bar {
+    display: flex !important;
+  }
+
+  /* Hide mobile menu button on desktop */
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+/* Book Categories */
+.publications-categories {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.publications-category-btn {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  color: #666;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.publications-category-btn:hover,
+.publications-category-btn.active {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+
+/* Newsletter Section */
+.publications-newsletter {
+  background: #f8f9fa;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.publications-newsletter h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.publications-newsletter-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.publications-newsletter-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.publications-newsletter-btn {
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.publications-newsletter-btn:hover {
+  background: #333;
+}
