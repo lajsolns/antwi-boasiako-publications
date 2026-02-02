@@ -1,20 +1,20 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Book1 from "../../../public/image/b1.png";
-import Book2 from "../../../public/image/b2.png";
-import CheckOutModal from "./CheckOutModal";
-import { BiSolidPhoneCall } from "react-icons/bi";
-import { MdEmail, MdArrowForward } from "react-icons/md";
-import { FaTwitter, FaWhatsapp, FaTelegram } from "react-icons/fa";
-import BookMountFrontFrench from "../../../public/image/book_mockup_french.png"
-import BookMountBackFrench from "../../../public/image/book_mount_french_back.png"
-import BookMountFrontEnglish from "../../../public/image/book_mockup_english.png"
-import BookMountBackEnglish from "../../../public/image/book_mount_back.png"
-import BackCoverEnglish from "../../../public/image/book_mount_back.png"
+const Book1 = "/image/b1.png";
+const Book2 = "/image/b2.png";
+const BookMountFrontFrench = "/image/book_mockup_french.png"
+const BookMountBackFrench = "/image/book_mount_french_back.png"
+const BookMountFrontEnglish = "/image/book_mockup_english.png"
+const BookMountBackEnglish = "/image/book_mount_back.png"
+const BackCoverEnglish = "/image/book_mount_back.png"
 import Link from "next/link";
 import ProductImageSlider from "@/components/ui/product-image-slider";
 import { useCart } from '@/context/CartContext';
+import { BiSolidPhoneCall } from "react-icons/bi";
+import { MdEmail, MdArrowForward } from "react-icons/md";
+import { FaTwitter, FaWhatsapp, FaTelegram } from "react-icons/fa";
+import CheckOutModal from "./CheckOutModal";
 
 const bookData = [
   {

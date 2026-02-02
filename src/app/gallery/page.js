@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 
 import Aos from "aos";
-import thumbnailUrl from "../../../public/image/thumbnail.png";
+const thumbnailUrl = "/image/thumbnail.png";
 
 const VideoModal = ({ video, onClose }) => {
   return (

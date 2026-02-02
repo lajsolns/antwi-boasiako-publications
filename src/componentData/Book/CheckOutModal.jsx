@@ -8,10 +8,10 @@ import { RiCloseLine } from "react-icons/ri";
 import { FaTruck, FaStore } from "react-icons/fa";
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
-import AirtelTigo from "../../../public/image/payments/airteltigo_mobile_money.svg"
-import Visa from "../../../public/image/payments/visa.svg"
-import MasterCard from "../../../public/image/payments/master_card.svg"
-import MTNMomo from "../../../public/image/payments/mtn_mobile_money.svg"
+const AirtelTigo = "/image/payments/airteltigo_mobile_money.svg"
+const Visa = "/image/payments/visa.svg"
+const MasterCard = "/image/payments/master_card.svg"
+const MTNMomo = "/image/payments/mtn_mobile_money.svg"
 
 const CheckOutModal = ({ setCheckOut }) => {
   const router = useRouter();

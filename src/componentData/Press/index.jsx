@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { motion } from "framer-motion";
 import { Geist } from 'next/font/google';
 import Link from 'next/link';
-import TrentoMedia from "../../../public/image/media_interview.jpg";
-import GC3BSpeech from "../../../public/image/GC3B_Speech.jpg";
+const TrentoMedia = "/image/media_interview.jpg";
+const GC3BSpeech = "/image/GC3B_Speech.jpg";
 import DailyGuide from "../../../public/image/press/daily_guide.jpg"
 import GhanaCyber from "../../../public/image/press/ghana_cyber.webp"
 import DrAndAwuah from "../../../public/image/press/Dr_Antwi_Boasiako_right_and_Mr_Awuah.webp"

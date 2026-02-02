@@ -1,13 +1,13 @@
 "use client";
 import React, { useRef } from "react";
 import Image from "next/image";
-import Profilemovile from "../../../public/image/CEO 1 1.png";
-import Profile1 from "../../../public/image/CEO_mirror.png";
-import Profile2 from "../../../public/image/IMG_9663 2.png";
-import FrontCover from "../../../public/image/Front_cover_french.png"
-import BookMockupEnglish from "../../../public/image/book_mockup_english.png"
-import BookMockupFrench from "../../../public/image/book_mockup_french.png"
-import BookMountRepublic from "../../../public/image/books/the_republic.png"
+const Profilemovile = "/image/CEO 1 1.png"
+const Profile1 = "/image/CEO_mirror.png"
+const Profile2 = "/image/IMG_9663 2.png"
+const FrontCover = "/image/Front_cover_french.png"
+const BookMockupEnglish = "/image/book_mockup_english.png"
+const BookMockupFrench = "/image/book_mockup_french.png"
+const BookMountRepublic = "/image/books/the_republic.png"
 import { motion } from "framer-motion";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,7 +19,7 @@ import 'swiper/css/effect-fade';
 import Link from "next/link";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import ItsOutPic from "../../../public/image/itsout.jpeg";
+const ItsOutPic = "/image/itsout.jpeg";
 import { EB_Garamond, Geist, Inter } from "next/font/google";
 import { Cormorant } from "next/font/google";
 

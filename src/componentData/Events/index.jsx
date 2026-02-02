@@ -13,8 +13,8 @@ import {
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
-import ForumCyber4 from "../../../public/image/Forum_Cyber_4.0.png"
-import OctopusConference2025 from "../../../public/image/Octopus_Conference_2025.png"
+const ForumCyber4 = "/image/Forum_Cyber_4.0.png"
+const OctopusConference2025 = "/image/Octopus_Conference_2025.png"
 import Link from 'next/link'
 
 const geist = Geist({

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Aos from "aos";
 import Link from "next/link";
-import Profile1 from "../../../public/image/aboutpics.png";
+const Profile1 = "/image/aboutpics.png";
 import { Geist } from 'next/font/google'
 
 const geist = Geist({

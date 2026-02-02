@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useState, useEffect, useContext } from "react";
-import BarbadosPresent from "../../public/image/barbados_present.jpg";
-import BarbadosPresent2 from "../../public/image/aboutpics.png";
+const BarbadosPresent = "/image/barbados_present.jpg";
+const BarbadosPresent2 = "/image/aboutpics.png";
 
 const CsrContext = createContext();
 

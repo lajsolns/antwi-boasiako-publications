@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Geist } from 'next/font/google';
 import Link from 'next/link';
-import TrentoStudentSpeech from "../../../public/image/speech.jpg";
+const TrentoStudentSpeech = "/image/speech.jpg";
 
 
 const geist = Geist({

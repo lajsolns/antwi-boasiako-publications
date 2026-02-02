@@ -3,24 +3,24 @@ import React, { useEffect, useState } from "react";
 import Footer from "@/componentData/Footer";
 import Navigation from "@/componentData/NavBar";
 import Image from "next/image";
-import Pic1 from "../../../public/image/oval_office.jpg";
-import TrentoMedia from "../../../public/image/media_interview.jpg";
-import MediaSpeech from "../../../public/image/media_speech.png";
-import SigningMemorandum from "../../../public/image/signing.png";
-import TrentoStudentSpeech from "../../../public/image/speech.jpg";
-import BookPresentation from "../../../public/image/barbados_present.jpg";
-import AwardPic from "../../../public/image/award.jpg";
-import OvalSitting from "../../../public/image/oval_sitting.jpg";
-import GC3BSpeech from "../../../public/image/GC3B_Speech.jpg";
-import Bookpresenting from "../../../public/image/book_presentation.png";
-import compress6 from "../../../public/compressed/6.png";
+const Pic1 = "/image/oval_office.jpg";
+const TrentoMedia = "/image/media_interview.jpg";
+const MediaSpeech = "/image/media_speech.png";
+const SigningMemorandum = "/image/signing.png";
+const TrentoStudentSpeech = "/image/speech.jpg";
+const BookPresentation = "/image/barbados_present.jpg";
+const AwardPic = "/image/award.jpg";
+const OvalSitting = "/image/oval_sitting.jpg";
+const GC3BSpeech = "/image/GC3B_Speech.jpg";
+const Bookpresenting = "/image/book_presentation.png";
+const compress6 = "/compressed/6.png";
+const AncAdoption = "/image/adoption_anca.jpg";
 import Aos from "aos";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import "react-photo-album/rows.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-import AncAdoption from "../../../public/image/adoption_anca.jpg"
 import Press from "@/componentData/Press";
 
 const ImagePage = () => {

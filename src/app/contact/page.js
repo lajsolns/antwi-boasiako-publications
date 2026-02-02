@@ -2,11 +2,11 @@
 import { useState } from "react";
 import Navigation from "@/componentData/NavBar";
 import React from "react";
-import Pic1 from "../../../public/image/book_table.jpg";
-import Pic2 from "../../../public/image/piled_books.jpg";
+const Pic1 = "/image/book_table.jpg";
+const Pic2 = "/image/piled_books.jpg";
+const Book1 = "/image/book1.jpg";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import Book1 from "../../../public/image/book1.jpg";
 import axios from "axios";
 import { CgSpinner } from "react-icons/cg";
 import {

@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import { Geist } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import TrentoMedia from "../../../public/image/media_interview.jpg";
-import OpenScience from "../../../public/image/openscience_hall.png";
-import OpenScienceModel from "../../../public/image/openscience_hall_model.png";
-import Unctad from "../../../public/image/unctad.png";
-import Cigi from "../../../public/image/cigi.png";
-import InternetFraud from "../../../public/image/internet_auction_fraud.png"
+const TrentoMedia = "/image/media_interview.jpg";
+const OpenScience = "/image/openscience_hall.png";
+const OpenScienceModel = "/image/openscience_hall_model.png";
+const Unctad = "/image/unctad.png";
+const Cigi = "/image/cigi.png";
+const InternetFraud = "/image/internet_auction_fraud.png"
 
 
 
