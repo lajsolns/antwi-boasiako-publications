@@ -5,8 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Footer from "@/componentData/Footer";
-import BookMountFrontEnglish from "../../../../public/image/book_mockup_english.png"
-import BookMountBackEnglish from "../../../../public/image/book_mount_back.png"
+const BookMountFrontEnglish = "/image/book_mockup_english.png"
+const BookMountBackEnglish = "/image/book_mount_back.png"
 import ProductImageSlider from "@/components/ui/product-image-slider";
 import { useCart } from '@/context/CartContext';
 import { FaTwitter, FaWhatsapp, FaTelegram } from "react-icons/fa";

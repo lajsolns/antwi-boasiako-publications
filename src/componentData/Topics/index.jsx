@@ -1,23 +1,23 @@
 "use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import Speech from "../../../public/image/speech.jpg";
-import MediaSpeech from "../../../public/image/media_speech.png";
-import Signing from "../../../public/image/signing.png";
-import Media from "../../../public/image/media_interview.jpg";
-import OvalSitting from "../../../public/image/oval_sitting.jpg";
+const Speech = "/image/speech.jpg";
+const MediaSpeech = "/image/media_speech.png";
+const Signing = "/image/signing.png";
+const Media = "/image/media_interview.jpg";
+const OvalSitting = "/image/oval_sitting.jpg";
 import Aos from "aos";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
-import compress1 from "../../../public/compressed/1.png"
-import compress2 from "../../../public/compressed/2.png"
-import compress3 from "../../../public/compressed/3.png"
-import compress4 from "../../../public/compressed/4.png"
-import compress5 from "../../../public/compressed/5.png"
-import compress6 from "../../../public/compressed/6.png"
-import compress7 from "../../../public/compressed/7.png"
+const compress1 = "/compressed/1.png"
+const compress2 = "/compressed/2.png"
+const compress3 = "/compressed/3.png"
+const compress4 = "/compressed/4.png"
+const compress5 = "/compressed/5.png"
+const compress6 = "/compressed/6.png"
+const compress7 = "/compressed/7.png"
 
 import { Geist } from 'next/font/google'
 

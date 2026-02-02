@@ -5,13 +5,13 @@ import Navigation from "@/componentData/NavBar";
 import Image from "next/image";
 import Footer from "@/componentData/Footer";
 import Aos from "aos";
-import AboutPic from "../../../public/image/CEO 1 1.png";
-import AwardPic from "../../../public/image/award.jpg";
-import MediaInteraction from "../../../public/image/media_speech.png"
-import compress6 from "../../../public/compressed/6.png"
-import compress1 from "../../../public/compressed/1.png"
-import GC3B from "../../../public/image/GC3B_Speech.jpg"
-import BookPresentation from "../../../public/image/barbados_present.jpg";
+const AboutPic = "/image/CEO 1 1.png";
+const AwardPic = "/image/award.jpg";
+const MediaInteraction = "/image/media_speech.png"
+const compress6 = "/compressed/6.png"
+const compress1 = "/compressed/1.png"
+const GC3B = "/image/GC3B_Speech.jpg"
+const BookPresentation = "/image/barbados_present.jpg";
 
 
 const AboutPage = () => {

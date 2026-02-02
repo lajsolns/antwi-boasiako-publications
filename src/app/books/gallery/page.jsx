@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Footer from "@/componentData/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import BookMountFrontFrench from "../../../../public/image/book_mockup_french.png"
-import BookMountBackFrench from "../../../../public/image/book_mount_french_back.png"
-import BookMountFrontEnglish from "../../../../public/image/book_mockup_english.png"
-import BookMountBackEnglish from "../../../../public/image/book_mount_back.png"
-import Book1 from "../../../../public/image/b1.png";
-import Book2 from "../../../../public/image/b2.png";
-import BookMountRepublic from "../../../../public/image/books/the_republic.png";
+const BookMountFrontFrench = "/image/book_mockup_french.png"
+const BookMountBackFrench = "/image/book_mount_french_back.png"
+const BookMountFrontEnglish = "/image/book_mockup_english.png"
+const BookMountBackEnglish = "/image/book_mount_back.png"
+const Book1 = "/image/b1.png";
+const Book2 = "/image/b2.png";
+const BookMountRepublic = "/image/books/the_republic.png";
 
 const booksData = [
     {
