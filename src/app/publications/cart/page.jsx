@@ -11,7 +11,7 @@ import PublicationsHeader from '@/components/PublicationsHeader';
 import PublicationsFooter from '@/components/PublicationsFooter';
 
 const PublicationsCartPage = () => {
-    const { cartItems, removeFromCart, updateQuantity, getTotalDisplay, getPriceDisplay, isLocationLoading } = useCart();
+    const { cartItems, removeFromCart, updateQuantity, getTotalDisplay, getPriceDisplay, getItemPrice, userLocation, isLocationLoading } = useCart();
     const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -161,7 +161,11 @@ const PublicationsCartPage = () => {
 
                                                 <div className="hidden sm:block text-right min-w-[120px]">
                                                     <p className="font-playfair text-xl text-gray-900">
-                                                        {isLocationLoading ? '...' : formatCurrency(item.price * item.quantity)}
+                                                        {isLocationLoading ? '...' : (() => {
+                                                            const total = getItemPrice(item) * item.quantity;
+                                                            if (userLocation?.pricing === 'ghana') return `GHS ${total.toFixed(2)}`;
+                                                            return `$${total.toFixed(2)}`;
+                                                        })()}
                                                     </p>
                                                 </div>
                                             </motion.div>

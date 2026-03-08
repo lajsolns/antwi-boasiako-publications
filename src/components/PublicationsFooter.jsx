@@ -37,73 +37,50 @@ export default function PublicationsFooter() {
             </div>
           </div>
 
-          {/* Publications */}
+          {/* Navigate */}
           <div>
             <h3 className="font-playfair text-2xl font-normal text-gray-100 mb-6 relative inline-block">
-              Publications
+              Navigate
               <span className="absolute -bottom-2 left-0 w-8 h-[1px] bg-gray-700"></span>
             </h3>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  The Republic
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  10 Commandments for Cybersecurity
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Digital Transformation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Academic Papers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Press Releases
-                </a>
-              </li>
+              {[
+                { name: 'Home', href: '/publications' },
+                { name: 'All Books', href: '/publications/all-books' },
+                { name: 'Events', href: '/publications/events' },
+                { name: 'Gallery', href: '/publications/gallery' },
+                { name: 'About the Author', href: '/publications/author' },
+                { name: 'Contact Us', href: '/publications/contact' },
+              ].map(link => (
+                <li key={link.name}>
+                  <Link href={link.href} className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* More */}
           <div>
             <h3 className="font-playfair text-2xl font-normal text-gray-100 mb-6 relative inline-block">
-              Services
+              More
               <span className="absolute -bottom-2 left-0 w-8 h-[1px] bg-gray-700"></span>
             </h3>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Cybersecurity Consulting
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Digital Governance
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Policy Development
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Speaking Engagements
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Training Programs
-                </a>
-              </li>
+              {[
+                { name: 'About', href: '/publications/about' },
+                { name: 'CSR', href: '/publications/csr' },
+                { name: 'Privacy Policy', href: '/publications/privacy-policy' },
+                { name: 'Shipping Policy', href: '/publications/shipping-policy' },
+                { name: 'Cart', href: '/publications/cart' },
+              ].map(link => (
+                <li key={link.name}>
+                  <Link href={link.href} className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
