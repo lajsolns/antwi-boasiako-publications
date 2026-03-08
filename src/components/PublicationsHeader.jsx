@@ -52,7 +52,7 @@ export default function PublicationsHeader({
     <>
       {/* Quote Banner */}
       <div className="bg-gray-900 text-white py-2 relative z-40">
-        <div className="max-w-6xl mx-auto flex items-center justify-between w-full h-full">
+        <div className="max-w-6xl mx-auto flex items-center justify-between w-full h-full px-2">
           <button
             onClick={() => setCurrentQuoteIndex((prev) => (prev - 1 + rotatingQuotes.length) % rotatingQuotes.length)}
             className="p-1 hover:bg-gray-800 transition-colors duration-200"
@@ -63,7 +63,7 @@ export default function PublicationsHeader({
             </svg>
           </button>
 
-          <div className="flex-1 text-center px-4 flex items-center justify-center overflow-hidden">
+          <div className="flex-1 text-center px-2 flex items-center justify-center overflow-hidden">
             <p className="flex items-center justify-center font-inter text-[10px] sm:text-xs tracking-[0.2em] uppercase font-light text-center leading-tight text-white/90">
               <span className="opacity-60 mr-2 hidden sm:inline">—</span>
               {rotatingQuotes && rotatingQuotes.length > 0 ? rotatingQuotes[currentQuoteIndex].text : ''}
@@ -97,10 +97,10 @@ export default function PublicationsHeader({
       <header
         className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm"
       >
-        <div className="max-w-6xl mx-auto px-8 pt-4 pb-4 relative h-24 lg:h-36 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-4 pb-4 relative h-24 lg:h-36 flex items-center justify-between">
           {/* Left - Mobile Menu Button */}
           <button
-            className="lg:hidden absolute left-8 top-1/2 transform -translate-y-1/2 p-2 hover:bg-gray-100 z-50 transition-all duration-300"
+            className="lg:hidden absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 p-2 hover:bg-gray-100 z-50 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <FiX className="w-6 h-6 text-gray-800" /> : <FiMenu className="w-6 h-6 text-gray-800" />}
@@ -121,7 +121,7 @@ export default function PublicationsHeader({
           </div>
 
           {/* Right - Search and Cart (Mobile) */}
-          <div className="lg:hidden absolute right-8 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+          <div className="lg:hidden absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 flex items-center gap-1 sm:gap-2">
             <button className="p-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200">
               <FiSearch className="w-5 h-5" />
             </button>

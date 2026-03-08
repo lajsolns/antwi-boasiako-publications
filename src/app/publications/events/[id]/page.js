@@ -209,7 +209,7 @@ export default function EventDetailPage({ params }) {
           </div>
 
           {/* Content Container (White Card) */}
-          <div className="bg-white p-8 md:p-12 border border-gray-100 shadow-xl shadow-gray-100/50 relative mb-12">
+          <div className="bg-white p-5 sm:p-8 md:p-12 border border-gray-100 shadow-xl shadow-gray-100/50 relative mb-12 overflow-hidden">
             {/* Elegant corner accents */}
             <div className="absolute top-0 left-0 w-8 h-[1px] bg-amber-800"></div>
             <div className="absolute top-0 left-0 w-[1px] h-8 bg-amber-800"></div>
@@ -232,7 +232,7 @@ export default function EventDetailPage({ params }) {
 
               {/* Event Info Sidebar */}
               <div className="lg:col-span-1">
-                <div className="bg-gray-50/50 border border-gray-100 rounded-sm p-8">
+                <div className="bg-gray-50/50 border border-gray-100 rounded-sm p-5 sm:p-8">
                   <div className="relative h-48 bg-gray-200 rounded-sm mb-8 overflow-hidden border border-gray-100">
                     {event.image ? (
                       <Image
@@ -292,7 +292,7 @@ export default function EventDetailPage({ params }) {
                     </button>
                   )}
 
-                  <div className="mt-6 flex gap-3">
+                  <div className="mt-6 flex flex-wrap gap-3">
                     <button className="flex-1 px-4 py-3 border border-gray-200 text-gray-600 hover:border-amber-800 hover:text-amber-800 transition-all duration-300 font-inter text-[10px] tracking-widest uppercase">
                       <FiShare2 className="w-3 h-3 inline mr-2" />
                       Share
@@ -309,7 +309,7 @@ export default function EventDetailPage({ params }) {
             {/* Content Tabs - Integrated into card */}
             <div className="mt-16">
               <div className="border-b border-gray-100 mb-10">
-                <nav className="flex space-x-12">
+                <nav className="flex space-x-8 sm:space-x-12 overflow-x-auto no-scrollbar whitespace-nowrap pb-1">
                   {['overview', 'agenda', 'speakers', 'media', 'gallery'].map((tab) => (
                     <button
                       key={tab}
@@ -317,7 +317,7 @@ export default function EventDetailPage({ params }) {
                       className={`pb-4 px-1 border-b-2 font-inter text-xs tracking-[0.2em] uppercase transition-all duration-300 ${activeTab === tab
                         ? 'border-amber-800 text-amber-800'
                         : 'border-transparent text-gray-400 hover:text-gray-600 hover:border-gray-200'
-                        }`}
+                        } flex-shrink-0`}
                     >
                       {tab}
                     </button>
@@ -334,7 +334,7 @@ export default function EventDetailPage({ params }) {
                       Detailed Highlights
                       <span className="flex-grow h-[1px] bg-gray-100 ml-4"></span>
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-6">
                       <div className="space-y-4">
                         <p className="font-inter text-gray-700 leading-relaxed font-light">
                           {event.longDescription}
@@ -397,7 +397,7 @@ export default function EventDetailPage({ params }) {
                       Distinguished Speakers
                       <span className="flex-grow h-[1px] bg-gray-100 ml-4"></span>
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                       {event.speakers.map((speaker, index) => (
                         <div key={index} className="flex flex-col sm:flex-row items-start gap-8 group">
                           <div className="flex-shrink-0 relative w-32 h-40 bg-gray-100 border border-gray-100 overflow-hidden shadow-sm">
@@ -549,7 +549,7 @@ export default function EventDetailPage({ params }) {
                       <span className="flex-grow h-[1px] bg-gray-100 ml-4"></span>
                     </h3>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                       {event.gallery.slice(0, 8).map((image, index) => (
                         <div
                           key={index}
