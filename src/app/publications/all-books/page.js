@@ -122,7 +122,7 @@ export default function AllBooksPage() {
       />
 
       {/* Main Content */}
-      <main className="pt-64 pb-16">
+      <main className="pb-16">
         <div className="max-w-6xl mx-auto px-8">
           {/* Page Header */}
           <div className="text-center mb-12">
@@ -137,47 +137,47 @@ export default function AllBooksPage() {
           {/* Books Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {books.map((book) => (
-                <Link 
-                  href={`/publications/${book.id}`} 
-                  key={book.id} 
-                  className="group cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
-                >
-                  <div className="relative mb-4 overflow-hidden">
-                    <div className="relative w-full aspect-[3/4] bg-gray-100">
-                      {book.coverImage && book.coverImage.trim() !== '' && (
-                        <Image 
-                          src={book.coverImage} 
-                          alt={book.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      )}
-                    </div>
+              <Link
+                href={`/publications/${book.id}`}
+                key={book.id}
+                className="group cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
+              >
+                <div className="relative mb-4 overflow-hidden">
+                  <div className="relative w-full aspect-[3/4] bg-gray-100">
+                    {book.coverImage && book.coverImage.trim() !== '' && (
+                      <Image
+                        src={book.coverImage}
+                        alt={book.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    )}
                   </div>
-                  <div className="p-6 text-left">
-                    <div className="mb-2">
-                      <span className="font-inter text-xs tracking-widest text-gray-500 uppercase">
-                        {book.author}
-                      </span>
-                    </div>
-                    <h3 className="font-merriweather text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-                      {book.title}
-                    </h3>
-                    <p className="font-inter text-sm text-gray-600 mb-4 line-clamp-3">
-                      {book.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="font-inter text-lg font-medium text-gray-900">
-                        ${book.internationalPrice}
-                      </span>
-                      <span className="font-inter text-sm text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
-                        View Details →
-                      </span>
-                    </div>
+                </div>
+                <div className="p-6 text-left">
+                  <div className="mb-2">
+                    <span className="font-inter text-xs tracking-widest text-gray-500 uppercase">
+                      {book.author}
+                    </span>
                   </div>
-                </Link>
-              ))}
+                  <h3 className="font-merriweather text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                    {book.title}
+                  </h3>
+                  <p className="font-inter text-sm text-gray-600 mb-4 line-clamp-3">
+                    {book.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-inter text-lg font-medium text-gray-900">
+                      ${book.internationalPrice}
+                    </span>
+                    <span className="font-inter text-sm text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
+                      View Details →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </main>

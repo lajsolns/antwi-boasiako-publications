@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FiShoppingBag, FiMenu, FiX, FiSearch } from 'react-icons/fi';
 import { useCart } from '@/context/CartContext';
 
@@ -26,32 +27,34 @@ const PublicationsCartButton = () => {
   );
 };
 
-export default function PublicationsHeader({ 
-  scrolled, 
-  isMobileMenuOpen, 
-  setIsMobileMenuOpen, 
-  currentQuoteIndex, 
+export default function PublicationsHeader({
+  scrolled,
+  isMobileMenuOpen,
+  setIsMobileMenuOpen,
+  currentQuoteIndex,
   setCurrentQuoteIndex,
-  rotatingQuotes 
+  rotatingQuotes
 }) {
+  const pathname = usePathname();
+
   // Calculate header top position based on scroll
-  const dynamicHeaderTop = scrolled ? 0 : 48; // Perfectly match quote banner height
+  // Calculate header top position based on scroll
+  // dynamicHeaderTop is no longer needed with sticky positioning + height animation
 
   return (
-    <>
-      {/* Quote Banner - Fixed at very top */}
-      <div 
-        className={`bg-gray-900 text-white py-2 px-4 transition-transform duration-300 ease-in-out overflow-hidden ${
-          scrolled ? '-translate-y-full' : 'translate-y-0'
-        }`}
+    <div className="sticky top-0 z-50 bg-white shadow-sm">
+      {/* Quote Banner */}
+      <div
+        className="bg-gray-900 text-white overflow-hidden transition-all duration-300 ease-in-out"
         style={{
-          height: '48px', // Reduced height
-          display: 'flex',
-          alignItems: 'center'
+          height: scrolled ? '0px' : '48px',
+          paddingTop: scrolled ? '0px' : '8px',
+          paddingBottom: scrolled ? '0px' : '8px',
+          opacity: scrolled ? 0 : 1
         }}
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <button 
+        <div className="max-w-6xl mx-auto flex items-center justify-between w-full h-full">
+          <button
             onClick={() => setCurrentQuoteIndex((prev) => (prev - 1 + rotatingQuotes.length) % rotatingQuotes.length)}
             className="p-1 hover:bg-gray-800 transition-colors duration-200"
             aria-label="Previous quote"
@@ -60,24 +63,24 @@ export default function PublicationsHeader({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          
+
           <div className="flex-1 text-center px-4 flex items-center justify-center">
             <p className="flex items-center align-center justify-center font-merriweather text-sm not-italic font-semibold text-center leading-tight">
               {rotatingQuotes[currentQuoteIndex].text}
-              <Link 
+              <Link
                 href={rotatingQuotes[currentQuoteIndex].link}
                 className="inline-flex items-center ml-2 hover:bg-gray-800 transition-colors duration-200 flex-shrink-0"
                 aria-label="Navigate to related page"
               >
                 <svg className="w-4 h-4 align-baseline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6L14 10L10 14" stroke="white" strokeOpacity="0.8"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10H1" stroke="white" strokeOpacity="0.6"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6L14 10L10 14" stroke="white" strokeOpacity="0.8" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10H1" stroke="white" strokeOpacity="0.6" />
                 </svg>
               </Link>
             </p>
           </div>
-          
-          <button 
+
+          <button
             onClick={() => setCurrentQuoteIndex((prev) => (prev + 1) % rotatingQuotes.length)}
             className="p-1 hover:bg-gray-800 transition-colors duration-200"
             aria-label="Next quote"
@@ -89,22 +92,14 @@ export default function PublicationsHeader({
         </div>
       </div>
 
-      {/* Header - Fixed */}
+      {/* Header */}
       <header
-        className="bg-white border-b border-gray-200 shadow-sm"
-        style={{
-          position: 'fixed',
-          top: `${dynamicHeaderTop}px`,
-          left: '0px',
-          right: '0px',
-          zIndex: 50,
-          transition: 'top 0.3s ease-in-out'
-        }}
+        className="bg-white border-b border-gray-200 relative"
       >
         {/* Top Bar - Logo and Cart */}
         <div className="max-w-6xl mx-auto px-8 pt-4 pb-4 relative h-24 lg:h-36 flex items-center justify-between">
           {/* Left - Mobile Menu Button */}
-          <button 
+          <button
             className="lg:hidden absolute left-8 top-1/2 transform -translate-y-1/2 p-2 hover:bg-gray-100 z-50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -115,8 +110,8 @@ export default function PublicationsHeader({
           {/* Center - Logo */}
           <div className="flex items-center justify-center flex-1">
             <Link href="/publications" className="flex items-center no-underline text-gray-900">
-              <Image 
-                src="/image/logo_silver.png" 
+              <Image
+                src="/image/logo_silver.png"
                 alt="Antwi-Boasiako Publications"
                 width={500}
                 height={500}
@@ -150,51 +145,75 @@ export default function PublicationsHeader({
               <div className="hidden lg:flex items-center space-x-8">
                 <Link
                   href="/publications/all-books"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  All Books
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/all-books' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    All Books
+                  </span>
                 </Link>
-                        <Link
+                <Link
                   href="/publications/events"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  Events
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/events' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Events
+                  </span>
                 </Link>
                 <Link
                   href="/publications/author"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  Author
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/author' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Author
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#gallery"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  href="/publications/gallery"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  Gallery
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/gallery' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Gallery
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#about"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  href="/publications/about"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  About
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/about' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    About
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#contact"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  href="/publications/contact"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  Contact Us
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/contact' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Contact Us
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#policies"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  href="/publications/policies"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  Policies
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/policies' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Policies
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#csr"
-                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                  href="/publications/csr"
+                  className="font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
-                  CSR
+                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/csr' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    CSR
+                  </span>
                 </Link>
               </div>
             </div>
@@ -208,66 +227,90 @@ export default function PublicationsHeader({
               <div className="space-y-2">
                 <Link
                   href="/publications/all-books"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  All Books
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/all-books' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    All Books
+                  </span>
                 </Link>
-         
+
                 <Link
                   href="/publications/events"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Events
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/events' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Events
+                  </span>
                 </Link>
                 <Link
                   href="/publications/author"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Author
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/author' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Author
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#gallery"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  href="/publications/gallery"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Gallery
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/gallery' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Gallery
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#about"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  href="/publications/about"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  About
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/about' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    About
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#contact"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  href="/publications/contact"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Contact Us
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/contact' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Contact Us
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#policies"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  href="/publications/policies"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Policies
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/policies' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    Policies
+                  </span>
                 </Link>
                 <Link
-                  href="/publications#csr"
-                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2"
+                  href="/publications/csr"
+                  className="block font-inter text-sm text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  CSR
+                  <span className={`inline-block relative after:content-[''] after:absolute after:h-[1px] after:bg-gray-900 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/csr' ? 'after:w-full' : 'after:w-0'
+                    }`}>
+                    CSR
+                  </span>
                 </Link>
               </div>
             </div>
           </div>
         )}
       </header>
-    </>
+    </div>
   );
 }

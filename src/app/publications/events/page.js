@@ -160,7 +160,7 @@ export default function EventsPage() {
       />
 
       {/* Main Content */}
-      <main className="pt-64 pb-16">
+      <main className="pb-16">
         <div className="max-w-6xl mx-auto px-8">
           {/* Page Header */}
           <div className="text-center mb-12">
@@ -176,71 +176,64 @@ export default function EventsPage() {
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <button
               onClick={() => setSelectedFilter('all')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'all'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'all'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               All Events
             </button>
             <button
               onClick={() => setSelectedFilter('upcoming')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'upcoming'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'upcoming'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Upcoming
             </button>
             <button
               onClick={() => setSelectedFilter('past')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'past'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'past'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Past Events
             </button>
             <button
               onClick={() => setSelectedFilter('conference')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'conference'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'conference'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Conferences
             </button>
             <button
               onClick={() => setSelectedFilter('author')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'author'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'author'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Author Events
             </button>
             <button
               onClick={() => setSelectedFilter('literary')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'literary'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'literary'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Literary Events
             </button>
             <button
               onClick={() => setSelectedFilter('launch')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${
-                selectedFilter === 'launch'
-                  ? 'bg-blue-800 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'launch'
+                ? 'bg-blue-800 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Book Launches
             </button>
@@ -268,11 +261,10 @@ export default function EventsPage() {
                     </div>
                   )}
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium font-inter ${
-                      event.type === 'upcoming'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium font-inter ${event.type === 'upcoming'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-gray-100 text-gray-800'
+                      }`}>
                       {event.type === 'upcoming' ? 'Upcoming' : 'Past'}
                     </span>
                   </div>
