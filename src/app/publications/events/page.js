@@ -160,7 +160,7 @@ export default function EventsPage() {
       />
 
       {/* Main Content */}
-      <main className="pb-16">
+      <main className="pt-12 pb-16">
         <div className="max-w-6xl mx-auto px-8">
           {/* Page Header */}
           <div className="text-center mb-12">
