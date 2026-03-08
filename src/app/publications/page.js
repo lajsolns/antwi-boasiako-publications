@@ -102,11 +102,10 @@ export default function PublicationsPage() {
       const parallaxElements = document.querySelectorAll('.parallax-zoom-bg');
 
       parallaxElements.forEach((element) => {
-        const speed = 0.3; // Reduced speed for smoother effect
+        const speed = 0.15; // Slow, subtle pan instead of aggressive zoom
         const yPos = -(scrolled * speed);
-        const scale = 1 + (scrolled * 0.0005); // Increased zoom rate
 
-        element.style.transform = `translateY(${yPos}px) scale(${Math.min(scale, 1.1)})`;
+        element.style.transform = `translateY(${yPos}px)`;
       });
 
       // Show/hide back-to-top button
@@ -635,92 +634,81 @@ export default function PublicationsPage() {
               src="/image/press/chronicling_ghana.jpeg"
               alt="Hero background"
               fill
-              className="object-cover parallax-zoom-bg"
+              className="object-cover parallax-zoom-bg brightness-75"
               style={{
-                transformOrigin: 'center center',
-                transform: 'scale(1.15)',
                 willChange: 'transform',
                 minHeight: '120vh'
               }}
               priority
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20"></div>
           </div>
 
           {/* Content */}
-          <div className="relative z-10 max-w-6xl mx-auto text-center">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+          <div className="relative z-10 max-w-4xl mx-auto text-center mt-12">
+            <h1 className="font-merriweather text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in tracking-tight drop-shadow-sm">
               Antwi-Boasiako Publications
             </h1>
-            <p className="font-inter text-lg md:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed mb-8 animate-fade-in-delay">
-              Sharing the intellectual works of Dr Albert Antwi-Boasiako
+            <p className="font-inter text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-delay font-light">
+              Sharing the intellectual works of Dr. Albert Antwi-Boasiako
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay">
-              <button className="px-8 py-3 bg-white text-gray-900 font-inter text-sm font-medium uppercase tracking-wide hover:bg-gray-100 transition-colors duration-200">
-                Browse Books
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-delay">
+              <button className="px-10 py-4 bg-white text-gray-900 border border-white font-inter text-sm font-medium uppercase tracking-widest hover:bg-transparent hover:text-white transition-all duration-300">
+                Browse Collection
               </button>
-              <button className="px-8 py-3 bg-transparent text-white border-2 border-white font-inter text-sm font-medium uppercase tracking-wide hover:bg-white hover:text-gray-900 transition-colors duration-200">
-                New & forthcoming
+              <button className="px-10 py-4 bg-transparent text-white border border-white/60 font-inter text-sm font-medium uppercase tracking-widest hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300">
+                Forthcoming Works
               </button>
             </div>
           </div>
         </section>
 
-        {/* New Release Section - Exact copy from Salt Publishing */}
-        <section className="py-16 px-8 bg-white">
+        {/* New Release Section - Classic Styling */}
+        <section className="py-24 px-8 bg-[#FAF9F6]">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-merriweather text-4xl font-bold text-gray-900 mb-4">
-                New release 🚀
+            <div className="text-center mb-16 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Featured Title</span>
+              <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
+                New Release
               </h2>
-              <div className="space-y-2">
-                <h3 className="font-inter text-lg font-normal text-gray-600">
-                  {/* The making of a Role Model Country */}
-                </h3>
-                {/* <h3 className="font-inter text-lg font-normal text-gray-600">
-                Dazzling Debuts to kickstart 2026 —Daily Mail
-              </h3> */}
-              </div>
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6"></div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              {/* Featured Book */}
-              <div className="flex flex-col items-center text-center">
-                <Link href="/publications/the-republic" className="relative w-full max-w-sm aspect-[3/4] mb-4 overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="flex flex-col items-center justify-center relative">
+                <Link href="/publications/the-republic" className="relative w-full max-w-md aspect-[3/4] overflow-hidden group">
+                  {/* Subtle, elegant drop shadow for the book cover */}
+                  <div className="absolute inset-4 bg-gray-200 blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <Image
                     src="/image/books/the_republic.png"
-                    alt="The Fox of Kensal Green"
+                    alt="The Republic"
                     fill
-                    className="object-cover"
+                    className="object-cover relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </Link>
               </div>
 
-              {/* Book Details Section */}
-              <div className="max-w-md flex flex-col">
-                <div className="font-inter text-xs tracking-widest text-gray-500 mb-2">
+              <div className="max-w-md flex flex-col pl-0 lg:pl-8">
+                <div className="font-inter text-xs tracking-[0.15em] font-medium text-amber-800 mb-3 uppercase">
                   DR. ANTWI-BOSIAKO
                 </div>
-                <h2 className="font-playfair text-3xl font-bold text-gray-900 leading-tight mb-1">
+                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
                   THE REPUBLIC
                 </h2>
-                <div className="font-inter text-sm text-gray-600">
-                  A PROFESSIONAL JOURNEY, GHANA'S CYBERSECURITY
-                </div>
-                <div className="font-inter text-sm text-gray-600 mb-4">
-                  & THE MAKING OF A ROLE MODEL COUNTRY
+                <div className="font-merriweather text-base text-gray-600 italic mb-6">
+                  A professional journey, Ghana's cybersecurity & the making of a role model country.
                 </div>
 
-                <div className="font-inter text-lg font-medium text-gray-900 mb-1">
-                  Africa & International | $35
-                </div>
-                <div className="font-inter text-lg font-medium text-gray-900 mb-4">
-                  Ghana | GHS 350
-                </div>
-                <div className="font-inter text-sm text-gray-600 mb-4">
-                  VAT included
+                <div className="space-y-1 mb-8">
+                  <div className="font-inter text-base text-gray-900">
+                    <span className="text-gray-500 mr-2">International:</span> $35.00
+                  </div>
+                  <div className="font-inter text-base text-gray-900">
+                    <span className="text-gray-500 mr-2">Ghana:</span> GHS 350
+                  </div>
+                  <div className="font-inter text-xs text-gray-400 mt-1">VAT included</div>
                 </div>
                 {/* 
                <div className="font-inter text-sm text-gray-700 mb-4">
@@ -730,30 +718,30 @@ export default function PublicationsPage() {
                 <a className="text-gray-600 underline text-xs hover:text-gray-900 transition-colors duration-200" href="#">Learn more</a>
               </div>  */}
 
-                <div className="mb-4">
-                  <div className="font-inter text-sm font-medium text-gray-800 mb-2">Format</div>
-                  <button type="button" className="px-4 py-2 bg-black text-white border border-gray-300  text-sm font-medium">
+                <div className="mb-6">
+                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">Format</div>
+                  <button type="button" className="px-5 py-2.5 bg-gray-900 text-white border border-gray-900 text-sm font-medium hover:bg-gray-800 transition-colors duration-200">
                     Paperback
                   </button>
                 </div>
 
-                <div className="mb-4">
-                  <div className="font-inter text-sm font-medium text-gray-800 mb-2">Quantity</div>
-                  <div className="flex items-center border border-gray-300  w-32">
+                <div className="mb-8">
+                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">Quantity</div>
+                  <div className="flex items-center border border-gray-300 w-32 bg-white">
                     <button
                       type="button"
-                      className="px-3 py-2 text-gray-600 hover:bg-gray-100 border-r border-gray-300"
+                      className="px-4 py-2 text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 border-r border-gray-200"
                       onClick={() => setNewReleaseQuantity((q) => Math.max(1, q - 1))}
                       aria-label="Decrease quantity"
                     >
                       −
                     </button>
-                    <div className="flex-1 text-center font-inter text-base text-gray-900 py-2">
+                    <div className="flex-1 text-center font-inter text-sm font-medium text-gray-900 py-2">
                       {newReleaseQuantity}
                     </div>
                     <button
                       type="button"
-                      className="px-3 py-2 text-gray-600 hover:bg-gray-100 border-l border-gray-300"
+                      className="px-4 py-2 text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 border-l border-gray-200"
                       onClick={() => setNewReleaseQuantity((q) => q + 1)}
                       aria-label="Increase quantity"
                     >
@@ -780,18 +768,18 @@ export default function PublicationsPage() {
                 Add to cart
               </button> */}
 
-                <button type="button" className="w-full min-h-14 bg-white text-blue-800 border-2 border-blue-800  font-inter text-lg font-semibold cursor-pointer shadow-lg mb-3 hover:bg-blue-800 hover:text-white transition-all duration-200">
-                  Add to <span className="font-extrabold">cart</span>
+                <button type="button" className="w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase cursor-pointer mb-4 hover:bg-transparent hover:border-gray-900 hover:text-gray-900 transition-all duration-300">
+                  Add to Cart
                 </button>
 
-                <div className="flex gap-3 mb-4">
-                  <button className="flex-1 px-4 py-2 text-blue-800 border border-blue-800  font-inter text-sm font-medium hover:bg-blue-800 hover:text-white transition-all duration-200 flex items-center justify-center gap-2">
-                    <FiShare2 className="w-4 h-4" />
+                <div className="flex gap-4 mb-4">
+                  <button className="flex-1 px-4 py-3 text-gray-600 border border-gray-300 font-inter text-xs tracking-wide uppercase hover:border-gray-900 hover:text-gray-900 transition-all duration-300 flex items-center justify-center gap-2">
+                    <FiShare2 className="w-3.5 h-3.5" />
                     Share
                   </button>
-                  <button className="flex-1 px-4 py-2 text-blue-800 border border-blue-800  font-inter text-sm font-medium hover:bg-blue-800 hover:text-white transition-all duration-200 flex items-center justify-center gap-2">
-                    <FiExternalLink className="w-4 h-4" />
-                    View full details
+                  <button className="flex-1 px-4 py-3 text-gray-600 border border-gray-300 font-inter text-xs tracking-wide uppercase hover:border-gray-900 hover:text-gray-900 transition-all duration-300 flex items-center justify-center gap-2">
+                    <FiExternalLink className="w-3.5 h-3.5" />
+                    Full Details
                   </button>
                 </div>
 
@@ -808,16 +796,16 @@ export default function PublicationsPage() {
         </section>
 
         {/* Categories */}
-        <section className="py-12 px-8 bg-gray-50">
+        <section className="py-20 px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-8 mb-16">
               {categories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3  font-inter text-md font-medium transition-colors duration-200 ${selectedCategory === category.id
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-100'
+                  className={`relative font-inter text-sm tracking-wide uppercase pb-1 transition-colors duration-300 ${selectedCategory === category.id
+                    ? 'text-amber-800 font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-amber-800'
+                    : 'text-gray-500 hover:text-gray-900'
                     }`}
                 >
                   {category.name}
@@ -826,11 +814,11 @@ export default function PublicationsPage() {
             </div>
 
             {/* Featured Books Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
               {filteredBooks.slice(0, 3).map(book => (
-                <Link href={`/publications/${book.id}`} key={book.id} className="book-card group cursor-pointer">
-                  <div className="relative mb-4 overflow-hidden ">
-                    <div className="relative w-full aspect-[3/4] bg-gray-100 book-card-image">
+                <Link href={`/publications/${book.id}`} key={book.id} className="book-card group cursor-pointer flex flex-col h-full">
+                  <div className="relative mb-6 overflow-hidden">
+                    <div className="relative w-full aspect-[3/4] bg-gray-50 book-card-image transition-transform duration-500 group-hover:shadow-md">
                       {book.coverImage && book.coverImage.trim() !== '' && (
                         <Image
                           src={book.coverImage}
@@ -845,25 +833,17 @@ export default function PublicationsPage() {
                       )}
                     </div>
                   </div>
-                  <div className="text-left">
-                    <h3 className="font-inter text-base font-medium text-gray-900 mb-1 group-hover:text-salt-orange transition-colors duration-200 hover:underline">
+                  <div className="text-center flex-grow flex flex-col">
+                    <h3 className="font-playfair text-xl md:text-2xl font-normal text-gray-900 mb-2 group-hover:text-amber-800 transition-colors duration-300">
                       {book.title}
                     </h3>
-                    <p className="font-inter text-sm text-gray-600 mb-3">
+                    <p className="font-inter text-xs tracking-widest text-gray-500 uppercase mb-4">
                       {book.author}
                     </p>
-                    <div className="flex flex-col items-start justify-between">
-                      <div className="w-full">
-                        <h3 className="text-sm md:text-base font-medium text-gray-900 block">
-                          Africa & International | ${book.internationalPrice}
-                        </h3>
-                        <h3 className="text-sm md:text-base font-medium text-gray-900 md:inline block">
-                          Ghana | GHS {book.ghanaPrice}
-                        </h3>
-                      </div>
-                      <button className="px-3 py-1 bg-white text-blue-800 border border-blue-800 font-inter text-xs font-medium hover:bg-blue-800 hover:text-white transition-all duration-200 mt-2">
-                        View Details
-                      </button>
+                    <div className="mt-auto space-y-1">
+                      <p className="text-sm font-inter text-gray-600 block">
+                        Intl: ${book.internationalPrice} <span className="mx-2 text-gray-300">|</span> GH: GHS {book.ghanaPrice}
+                      </p>
                     </div>
                   </div>
                 </Link>
@@ -873,19 +853,19 @@ export default function PublicationsPage() {
         </section>
 
         {/* Events Section */}
-        <section className="py-20 px-8 bg-gray-100">
+        <section className="py-24 px-8 bg-[#FAF9F6] border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
             {!showPastEvents ? (
               <div>
-                <div className="text-center mb-16">
-                  <div className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2  text-sm font-semibold mb-6">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <div className="text-center mb-16 space-y-4">
+                  <div className="inline-flex items-center gap-2 border border-gray-900 text-gray-900 px-4 py-1.5 text-xs tracking-[0.2em] font-medium uppercase mb-4">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    UPCOMING EVENT
+                    Upcoming Event
                   </div>
 
-                  <h2 className="font-merriweather text-4xl font-bold text-gray-900 mb-6">
+                  <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
                     {currentUpcomingEvent.title}
                   </h2>
 
@@ -940,25 +920,20 @@ export default function PublicationsPage() {
                     </div>
                   )}
 
-                  <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                  <div className="bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-500">
                     <div className="grid md:grid-cols-2 gap-0">
                       {/* Event Flyer */}
-                      <div className="relative h-64 md:h-auto bg-gray-100">
+                      <div className="relative h-64 md:h-auto bg-gray-50 border-r border-gray-100">
                         <Image
                           src={currentUpcomingEvent.flyer}
                           alt={currentUpcomingEvent.title}
                           fill
-                          className="object-cover"
+                          className="object-cover p-8"
                           sizes="(max-width: 768px) 100vw, 50vw"
                           onError={(e) => {
                             e.target.src = "/image/CyberForum4Flier.png";
                           }}
                         />
-                        <div className="absolute top-4 right-4">
-                          <span className="bg-red-600 text-white px-3 py-1  text-xs font-semibold">
-                            UPCOMING
-                          </span>
-                        </div>
                       </div>
 
                       {/* Event Details */}
@@ -969,22 +944,20 @@ export default function PublicationsPage() {
                           </p>
 
                           <div className="mb-8">
-                            <h4 className="font-merriweather text-xl font-semibold text-gray-900 mb-4">Event Highlights</h4>
-                            <ul className="space-y-3">
+                            <h4 className="font-playfair text-2xl font-normal text-gray-900 mb-6">Event Details</h4>
+                            <ul className="space-y-4">
                               {currentUpcomingEvent.highlights.map((highlight, index) => (
-                                <li key={index} className="flex items-start gap-3">
-                                  <svg className="w-5 h-5 text-blue-800 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                  </svg>
-                                  <span className="font-inter text-gray-800">{highlight}</span>
+                                <li key={index} className="flex items-start gap-4">
+                                  <div className="w-1.5 h-1.5 bg-amber-800 rounded-full mt-2 flex-shrink-0"></div>
+                                  <span className="font-inter text-gray-600 text-sm leading-relaxed">{highlight}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                         </div>
 
-                        <button className="w-full px-8 py-4 bg-white text-blue-800 border-2 border-blue-800  font-inter text-lg font-semibold hover:bg-blue-800 hover:text-white transition-all duration-200 shadow-lg">
-                          Register Now
+                        <button className="w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase hover:bg-transparent hover:text-gray-900 transition-all duration-300">
+                          Register to Attend
                         </button>
                       </div>
                     </div>
@@ -1090,21 +1063,23 @@ export default function PublicationsPage() {
           </div>
         </section>
 
-        {/* Instagram Section */}
-        <section className="py-16 px-8 bg-white">
+        {/* Social Media Section */}
+        <section className="py-24 px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-merriweather text-3xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-16 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Community</span>
+              <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
                 Follow us on LinkedIn
               </h2>
-              <p className="font-inter text-gray-600 max-w-2xl mx-auto">
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+              <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
                 Discover behind-the-scenes content, author interviews, and literary inspiration.
-                Join our community of book lovers and stay connected with the latest from our publishing house.
+                Join our community and stay connected with the latest from our publishing house.
               </p>
             </div>
 
-            {/* First Row - 5 images */}
-            <div className="grid grid-cols-5 gap-1 mb-1">
+            {/* Image Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-1 mb-12">
               <div
                 className="relative aspect-[4/5] overflow-hidden group cursor-pointer"
                 onClick={() => {
@@ -1121,7 +1096,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1142,7 +1117,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1163,7 +1138,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1184,7 +1159,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1205,14 +1180,11 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
-            </div>
 
-            {/* Second Row - 5 more images */}
-            <div className="grid grid-cols-5 gap-1 mb-1">
               <div
                 className="relative aspect-[4/5] overflow-hidden group cursor-pointer"
                 onClick={() => {
@@ -1229,7 +1201,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1250,7 +1222,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1271,7 +1243,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1292,7 +1264,7 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
@@ -1313,60 +1285,64 @@ export default function PublicationsPage() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
               </div>
             </div>
 
-            <div className="text-left">
+            <div className="text-center mt-8">
               <a
-                href="https://www.instagram.com"
+                href="https://www.linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 relative group pb-1 text-sm"
+                className="inline-flex items-center gap-3 font-inter text-sm font-medium tracking-widest text-gray-900 uppercase hover:text-amber-800 transition-colors duration-300 group"
               >
-
-                @antwibosiakopublications
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform scale-x-0 scale-x-100 transition-transform duration-300 origin-left"></span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+                Connect on LinkedIn
+                <span className="w-8 h-[1px] bg-gray-400 group-hover:bg-amber-800 transition-colors duration-300"></span>
               </a>
             </div>
           </div>
         </section>
 
-        {/* Recently Been Featured Section */}
-        <section className="py-20 px-8 bg-gray-50">
+        {/* Recently Been Featured Section - Classic Editorial Style */}
+        <section className="py-24 px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-merriweather text-3xl font-bold text-gray-900 mb-4">
-                Recently been Featured
+            <div className="text-center mb-16 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">In The Press</span>
+              <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
+                Recently Featured
               </h2>
-              <p className="font-inter text-gray-600 max-w-2xl mx-auto">
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+              <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
                 Our books and authors have been recognized by leading publications and media outlets around the world.
               </p>
             </div>
 
             <div className="relative">
               {/* Navigation buttons */}
-              <div className="flex justify-end mb-4 gap-2">
+              <div className="flex justify-end mb-6 gap-3">
                 <button
                   onClick={prevSlide}
-                  className="p-2 bg-white border border-gray-300  hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-10 h-10 flex items-center justify-center border border-gray-300 bg-transparent text-gray-500 hover:text-gray-900 hover:border-gray-900 transition-all duration-300 disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-500 disabled:cursor-not-allowed"
                   disabled={totalSlides <= 1}
                   aria-label="Previous slide"
                 >
-                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="p-2 bg-white border border-gray-300  hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-10 h-10 flex items-center justify-center border border-gray-300 bg-transparent text-gray-500 hover:text-gray-900 hover:border-gray-900 transition-all duration-300 disabled:opacity-30 disabled:hover:border-gray-300 disabled:hover:text-gray-500 disabled:cursor-not-allowed"
                   disabled={totalSlides <= 1}
                   aria-label="Next slide"
                 >
-                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
               </div>
@@ -1389,27 +1365,25 @@ export default function PublicationsPage() {
                           .map((feature) => {
                             const colorClasses = getColorClasses(feature.color);
                             return (
-                              <div key={feature.id} className="bg-white p-6  shadow-sm">
-                                <div className="flex items-start gap-4">
-                                  <div className={`w-12 h-12 ${colorClasses.bg}  flex items-center justify-center flex-shrink-0`}>
-                                    <div className={colorClasses.text}>
-                                      {getPublicationIcon(feature.source)}
-                                    </div>
+                              <div key={feature.id} className="bg-transparent p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-500 flex flex-col h-full group/card">
+                                <div className="flex items-center gap-4 mb-8">
+                                  <div className={`w-12 h-12 flex items-center justify-center flex-shrink-0 text-gray-400 group-hover/card:text-gray-700 transition-colors duration-500`}>
+                                    {getPublicationIcon(feature.source)}
                                   </div>
-                                  <div>
-                                    <h3 className="font-merriweather text-lg font-semibold text-gray-900 mb-2">
-                                      "{feature.title}"
-                                    </h3>
-                                    <p className="font-inter text-sm text-gray-600 mb-2">
-                                      {feature.source}
-                                    </p>
-                                    <p className="font-inter text-gray-800 text-sm">
-                                      {feature.description}
-                                    </p>
+                                  <div className="font-inter text-xs font-semibold tracking-widest text-amber-800 uppercase">
+                                    {feature.source}
                                   </div>
                                 </div>
+                                <div className="flex-grow flex flex-col">
+                                  <h3 className="font-playfair text-xl md:text-2xl font-normal text-gray-900 mb-4 leading-relaxed italic">
+                                    "{feature.title}"
+                                  </h3>
+                                  <p className="font-inter text-gray-600 text-sm leading-relaxed mt-auto font-light">
+                                    {feature.description}
+                                  </p>
+                                </div>
                               </div>
-                            )
+                            );
                           })}
                       </div>
                     </div>
@@ -1420,51 +1394,40 @@ export default function PublicationsPage() {
           </div>
         </section>
 
-        {/* Modern Testimonials Section - 2026 Design */}
-        <section className="py-20 px-8 bg-white relative overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
-          </div>
-
+        {/* Testimonials Section - Classic Editorial Design */}
+        <section className="py-24 px-8 bg-white border-t border-gray-100 relative">
           <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-
-              <h2 className="font-merriweather text-4xl font-bold text-gray-900 mb-4">
-                Voices from the Digital Frontier
+            <div className="text-center mb-20 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Critical Acclaim</span>
+              <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
+                Editorial Reviews
               </h2>
-              <p className="font-inter text-gray-600 max-w-3xl mx-auto text-lg">
-                Leading minds in AI security, digital policy, and cyber defense share how these publications are shaping the future of cybersecurity in 2026 and beyond
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+              <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                Perspectives from leading voices on how our works are shaping cybersecurity dialogue globally.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {testimonials.map((testimonial, index) => (
-                <div key={testimonial.id} className="group relative">
-                  {/* Card with gradient border */}
-                  <div className="relative bg-white rounded-2xl transition-all duration-300 p-8 border border-gray-100 hover:border-blue-200">
-                    {/* Year Badge */}
-                    {/* <div className="absolute -top-3 -right-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    {testimonial.year}
-                  </div> */}
+                <div key={testimonial.id} className="group flex flex-col h-full">
+                  {/* Classic Review Card */}
+                  <div className="bg-transparent p-8 md:p-10 border border-gray-200 flex-grow flex flex-col relative transition-colors duration-500 hover:border-gray-300 hover:bg-gray-50/50">
 
-                    {/* Expertise Tag */}
-                    <div className="inline-flex items-center gap-1 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 px-3 py-1 rounded-lg text-xs font-medium mb-4">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      {testimonial.expertise}
-                    </div>
-
-                    {/* Quote Icon */}
-                    <div className="mb-4">
-                      <svg className="w-8 h-8 text-blue-200" fill="currentColor" viewBox="0 0 24 24">
+                    {/* Minimalist Quote Icon */}
+                    <div className="absolute top-8 right-8 opacity-10">
+                      <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                       </svg>
                     </div>
 
+                    <div className="mb-8">
+                      <span className="font-inter text-xs tracking-widest text-amber-800 uppercase">{testimonial.expertise}</span>
+                    </div>
+
                     {/* Content */}
-                    <p className="font-inter text-gray-800 text-base leading-relaxed mb-6">
-                      {testimonial.content}
+                    <p className="font-merriweather text-gray-700 text-lg leading-loose mb-10 italic flex-grow">
+                      "{testimonial.content}"
                     </p>
 
                     {/* Rating */}
@@ -1477,37 +1440,30 @@ export default function PublicationsPage() {
                     </div>
 
                     {/* Author */}
-                    <div className="flex items-center gap-4">
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-200">
-                          <Image
-                            src={testimonial.avatar}
-                            alt={testimonial.name}
-                            width={200}
-                            height={200}
-                            className="w-full h-full object-cover"
-                            style={{ objectFit: 'cover' }}
-                            onError={(e) => {
-                              e.target.src = "https://randomuser.me/api/portraits/lego/0.jpg";
-                            }}
-                          />
-                        </div>
-                        {/* Status Indicator */}
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                    <div className="flex items-center gap-4 mt-auto border-t border-gray-100 pt-6">
+                      <div className="w-12 h-12 rounded-full overflow-hidden filter grayscale">
+                        <Image
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          width={200}
+                          height={200}
+                          className="w-full h-full object-cover"
+                          style={{ objectFit: 'cover' }}
+                          onError={(e) => {
+                            e.target.src = "https://randomuser.me/api/portraits/lego/0.jpg";
+                          }}
+                        />
                       </div>
                       <div>
-                        <h3 className="font-inter text-base font-semibold text-gray-900">
+                        <h3 className="font-playfair text-lg font-normal text-gray-900">
                           {testimonial.name}
                         </h3>
-                        <p className="font-inter text-sm text-gray-600">
+                        <p className="font-inter text-xs text-gray-500 uppercase tracking-wide mt-1">
                           {testimonial.role}
                         </p>
                       </div>
                     </div>
                   </div>
-
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
                 </div>
               ))}
             </div>
@@ -1515,85 +1471,52 @@ export default function PublicationsPage() {
           </div>
         </section>
 
-        {/* Companies We've Worked With - Logo Showcase */}
-        <section className="py-16 px-8 bg-white">
+        {/* Organizations Showcase - Classic Logo Grid */}
+        <section className="py-24 px-8 bg-[#FAF9F6]">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-merriweather text-3xl font-bold text-gray-900 mb-4">
-                Companies We've Worked With
+            <div className="text-center mb-16 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Trusted Partners</span>
+              <h2 className="font-playfair text-3xl font-normal text-gray-900 mb-4">
+                Organizations We've Worked With
               </h2>
-              <p className="font-inter text-gray-600 max-w-2xl mx-auto">
-                Proud to have collaborated with leading organizations across various industries
-              </p>
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6"></div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-              {/* Company Logo 1 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">TechCorp</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-70 contrast-125 grayscale hover:grayscale-0 transition-all duration-500">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="flex items-center justify-center">
+                  <div className="w-32 h-20 flex items-center justify-center relative">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/e/ee/UN_emblem_blue.svg" alt="United Nations" fill className="object-contain" />
+                  </div>
                 </div>
-              </div>
-
-              {/* Company Logo 2 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">Global Bank</span>
-                </div>
-              </div>
-
-              {/* Company Logo 3 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">NATO</span>
-                </div>
-              </div>
-
-              {/* Company Logo 4 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">African Union</span>
-                </div>
-              </div>
-
-              {/* Company Logo 5 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">UN Digital</span>
-                </div>
-              </div>
-
-              {/* Company Logo 6 */}
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-20 bg-gray-50 rounded-lg flex items-center justify-center p-4 hover:bg-gray-100 transition-colors duration-200">
-                  <span className="text-gray-700 font-medium text-sm">World Bank</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Join Us Today Section */}
-        <section className="py-20 px-8" style={{ backgroundColor: '#f3f3f3' }}>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-merriweather text-3xl font-bold text-gray-900 mb-6">
-                Join us today!
+        {/* Join Us Today Section - Classic Editorial Board */}
+        <section className="py-24 px-8 border-t border-gray-200 bg-white">
+          <div className="max-w-4xl mx-auto border border-gray-200 p-12 md:p-16 text-center">
+            <div className="mb-10 space-y-4">
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-amber-800 uppercase">The Dispatch</span>
+              <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
+                Subscribe to Our Newsletter
               </h2>
-              <p className="font-inter text-lg text-gray-800 max-w-3xl mx-auto leading-relaxed mb-8">
-                Subscribe to our newsletter for monthly product updates, a regular newsletter, as well as links to features in our House Magazine. You can unsubscribe at any time.
+              <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+              <p className="font-inter text-base text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+                Receive monthly updates on new releases, author interviews, and exclusive excerpts from our House Magazine directly to your inbox.
               </p>
             </div>
 
             <div className="flex justify-center items-center mb-12">
               <div className="max-w-md w-full">
-                <div className="relative">
+                <div className="flex flex-col sm:flex-row shadow-sm">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-3 pr-12 bg-white border border-gray-300  text-gray-900 placeholder-gray-500 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                    className="flex-1 px-6 py-4 bg-gray-50 border border-gray-200 text-gray-900 font-inter text-sm placeholder-gray-400 focus:outline-none focus:border-gray-900 focus:ring-0 transition-colors duration-300"
                   />
                   <button
                     onClick={() => {
@@ -1603,12 +1526,10 @@ export default function PublicationsPage() {
                         setEmail('');
                       }
                     }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-gray-900 text-white  hover:bg-gray-800 transition-colors duration-200"
+                    className="px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors duration-300"
                     aria-label="Subscribe to newsletter"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+                    Subscribe
                   </button>
                 </div>
               </div>
@@ -1656,10 +1577,10 @@ export default function PublicationsPage() {
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 bg-blue-800 text-white p-3 rounded-full shadow-lg hover:bg-blue-900 transition-all duration-300 z-40 group"
+          className="fixed bottom-8 right-8 bg-gray-900 text-white p-3 shadow-lg hover:bg-amber-800 transition-all duration-300 z-40 group"
           aria-label="Back to top"
         >
-          <FiChevronUp className="w-5 h-5 group-hover:translate-y-[-2px] transition-transform duration-300" />
+          <FiChevronUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
         </button>
       )}
     </div>
