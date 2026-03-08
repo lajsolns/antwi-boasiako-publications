@@ -163,80 +163,39 @@ export default function EventsPage() {
       <main className="pt-12 pb-16">
         <div className="max-w-6xl mx-auto px-8">
           {/* Page Header */}
-          <div className="text-center mb-12">
-            <h1 className="font-merriweather text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16 space-y-4">
+            <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Our Schedule</span>
+            <h1 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
               Publications Events
             </h1>
-            <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto">
+            <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+            <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
               Join us for book launches, author events, workshops, and literary discussions featuring Dr. Antwi-Boasiako and other distinguished authors.
             </p>
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <button
-              onClick={() => setSelectedFilter('all')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'all'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              All Events
-            </button>
-            <button
-              onClick={() => setSelectedFilter('upcoming')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'upcoming'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Upcoming
-            </button>
-            <button
-              onClick={() => setSelectedFilter('past')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'past'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Past Events
-            </button>
-            <button
-              onClick={() => setSelectedFilter('conference')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'conference'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Conferences
-            </button>
-            <button
-              onClick={() => setSelectedFilter('author')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'author'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Author Events
-            </button>
-            <button
-              onClick={() => setSelectedFilter('literary')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'literary'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Literary Events
-            </button>
-            <button
-              onClick={() => setSelectedFilter('launch')}
-              className={`px-6 py-2 rounded-full font-inter text-sm font-medium transition-colors duration-200 ${selectedFilter === 'launch'
-                ? 'bg-blue-800 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-            >
-              Book Launches
-            </button>
+          <div className="flex flex-wrap justify-center gap-8 mb-16">
+            {[
+              { id: 'all', label: 'All Events' },
+              { id: 'upcoming', label: 'Upcoming' },
+              { id: 'past', label: 'Past Events' },
+              { id: 'conference', label: 'Conferences' },
+              { id: 'author', label: 'Author Events' },
+              { id: 'literary', label: 'Literary Events' },
+              { id: 'launch', label: 'Book Launches' }
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setSelectedFilter(filter.id)}
+                className={`relative font-inter text-sm tracking-wide uppercase pb-1 transition-colors duration-300 ${selectedFilter === filter.id
+                  ? 'text-amber-800 font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-amber-800'
+                  : 'text-gray-500 hover:text-gray-900'
+                  }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
 
           {/* Events Grid */}
@@ -244,26 +203,26 @@ export default function EventsPage() {
             {filteredEvents.map((event) => (
               <div
                 key={event.id}
-                className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
+                className="bg-transparent p-6 md:p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-500 flex flex-col h-full group"
               >
                 {/* Event Image */}
-                <div className="relative h-48 bg-gray-100">
+                <div className="relative h-56 md:h-64 bg-gray-50 mb-8 overflow-hidden">
                   {event.image ? (
                     <Image
                       src={event.image}
                       alt={event.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                       <FiCalendar className="w-12 h-12 text-gray-400" />
                     </div>
                   )}
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium font-inter ${event.type === 'upcoming'
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-gray-100 text-gray-800'
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className={`px-4 py-1.5 border text-xs tracking-[0.15em] font-medium font-inter uppercase ${event.type === 'upcoming'
+                      ? 'border-green-800 bg-white/90 text-green-800 backdrop-blur-sm'
+                      : 'border-gray-500 bg-white/90 text-gray-700 backdrop-blur-sm'
                       }`}>
                       {event.type === 'upcoming' ? 'Upcoming' : 'Past'}
                     </span>
@@ -271,38 +230,38 @@ export default function EventsPage() {
                 </div>
 
                 {/* Event Content */}
-                <div className="p-6">
+                <div className="flex flex-col flex-grow">
                   <div className="mb-4">
-                    <span className="font-inter text-xs tracking-widest text-gray-500 uppercase">
+                    <span className="font-inter text-xs tracking-widest text-amber-800 uppercase">
                       {event.category}
                     </span>
                   </div>
-                  <h3 className="font-merriweather text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="font-playfair text-2xl font-normal text-gray-900 mb-3 group-hover:text-amber-800 transition-colors duration-300">
                     {event.title}
                   </h3>
-                  <p className="font-inter text-sm text-gray-600 mb-4">
+                  <p className="font-merriweather text-sm text-gray-600 italic mb-5">
                     {event.subtitle}
                   </p>
-                  <p className="font-inter text-sm text-gray-700 mb-6 line-clamp-3">
+                  <p className="font-inter text-sm text-gray-600 font-light mb-8 line-clamp-3 leading-relaxed">
                     {event.description}
                   </p>
 
                   {/* Event Details */}
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiCalendar className="w-4 h-4 mr-2" />
+                  <div className="space-y-3 mb-8 mt-auto border-t border-gray-100 pt-6">
+                    <div className="flex items-center text-sm text-gray-600 font-light tracking-wide">
+                      <FiCalendar className="w-4 h-4 mr-3 text-amber-800" />
                       {formatDate(event.date)}
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiClock className="w-4 h-4 mr-2" />
+                    <div className="flex items-center text-sm text-gray-600 font-light tracking-wide">
+                      <FiClock className="w-4 h-4 mr-3 text-amber-800" />
                       {event.time}
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiMapPin className="w-4 h-4 mr-2" />
+                    <div className="flex items-center text-sm text-gray-600 font-light tracking-wide">
+                      <FiMapPin className="w-4 h-4 mr-3 text-amber-800" />
                       {event.location}
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiUsers className="w-4 h-4 mr-2" />
+                    <div className="flex items-center text-sm text-gray-600 font-light tracking-wide">
+                      <FiUsers className="w-4 h-4 mr-3 text-amber-800" />
                       {event.attendees} attendees
                     </div>
                   </div>
@@ -310,10 +269,10 @@ export default function EventsPage() {
                   {/* Action Button */}
                   <Link
                     href={`/publications/events/${event.id}`}
-                    className="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-inter text-sm font-medium"
+                    className="inline-flex items-center justify-center w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 hover:bg-transparent hover:text-gray-900 transition-all duration-300 font-inter text-sm tracking-widest uppercase mt-auto"
                   >
                     {event.type === 'upcoming' ? 'Register Now' : 'View Details'}
-                    <FiArrowRight className="w-4 h-4 ml-2" />
+                    <FiArrowRight className="w-4 h-4 ml-3" />
                   </Link>
                 </div>
               </div>
@@ -322,15 +281,15 @@ export default function EventsPage() {
 
           {/* No Events Message */}
           {filteredEvents.length === 0 && (
-            <div className="text-center py-12">
-              <div className="mb-4">
-                <FiCalendar className="w-16 h-16 text-gray-400 mx-auto" />
+            <div className="text-center py-24 border border-gray-200">
+              <div className="mb-6">
+                <FiCalendar className="w-12 h-12 text-gray-300 mx-auto" strokeWidth={1} />
               </div>
-              <h3 className="font-merriweather text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="font-playfair text-2xl font-normal text-gray-900 mb-3">
                 No events found
               </h3>
-              <p className="font-inter text-gray-600">
-                Check back soon for upcoming events!
+              <p className="font-inter text-gray-500 font-light max-w-md mx-auto">
+                Check back soon for upcoming events or adjust your filters above.
               </p>
             </div>
           )}

@@ -155,73 +155,77 @@ export default function AuthorPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative h-screen bg-gray-900">
+      <section className="relative min-h-[90vh] bg-[#111111] py-32 flex items-center">
         <div className="absolute inset-0">
           {author.backgroundImage && (
             <Image
               src={author.backgroundImage}
               alt="Background"
               fill
-              className="object-cover opacity-30"
+              className="object-cover opacity-20 filter grayscale"
             />
           )}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/90 to-transparent"></div>
         </div>
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-6xl mx-auto px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h1 className="font-merriweather text-4xl lg:text-5xl font-bold text-white mb-4 whitespace-nowrap">
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <span className="inline-block font-inter text-xs tracking-[0.2em] text-amber-700 uppercase mb-4">
+                  {author.title}
+                </span>
+                <h1 className="font-playfair text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text-white mb-8 tracking-tight whitespace-nowrap">
                   {author.name}
                 </h1>
-                <p className="font-inter text-xl text-gray-200 mb-6">
-                  {author.title}
-                </p>
-                <p className="font-inter text-gray-300 leading-relaxed mb-8">
+                <div className="w-16 h-[1px] bg-amber-800 mb-8"></div>
+                <p className="font-inter text-lg text-gray-300 leading-relaxed font-light mb-12 max-w-xl">
                   {author.bio}
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-6 items-center">
                   <a
                     href="/"
-                    className="inline-flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-inter text-sm font-medium"
+                    className="inline-flex justify-center items-center px-8 py-4 bg-white text-gray-900 border border-white font-inter text-sm tracking-widest uppercase hover:bg-transparent hover:text-white transition-all duration-300"
                   >
-                    <FiExternalLink className="w-4 h-4 mr-2" />
                     Home
                   </a>
                   <a
                     href={`mailto:${author.email}`}
-                    className="inline-flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-inter text-sm font-medium"
+                    className="inline-flex justify-center items-center px-8 py-4 bg-transparent text-white border border-white/40 font-inter text-sm tracking-widest uppercase hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
                   >
-                    <FiMail className="w-4 h-4 mr-2" />
                     Contact
                   </a>
-                  {author.social.twitter && (
-                    <a
-                      href={author.social.twitter}
-                      className="inline-flex items-center px-4 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-inter text-sm font-medium"
-                    >
-                      <FiTwitter className="w-4 h-4 mr-2" />
-                      Twitter
-                    </a>
-                  )}
-                  {author.social.linkedin && (
-                    <a
-                      href={author.social.linkedin}
-                      className="inline-flex items-center px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-200 font-inter text-sm font-medium"
-                    >
-                      <FiLinkedin className="w-4 h-4 mr-2" />
-                      LinkedIn
-                    </a>
-                  )}
+                  <div className="flex gap-4 ml-2">
+                    {author.social.twitter && (
+                      <a
+                        href={author.social.twitter}
+                        className="w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                        aria-label="Twitter"
+                      >
+                        <FiTwitter className="w-5 h-5" />
+                      </a>
+                    )}
+                    {author.social.linkedin && (
+                      <a
+                        href={author.social.linkedin}
+                        className="w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300"
+                        aria-label="LinkedIn"
+                      >
+                        <FiLinkedin className="w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-center">
-                <div className="relative w-64 h-64 lg:w-80 lg:h-80">
+              <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+                <div className="relative w-72 h-[28rem] lg:w-96 lg:h-[36rem] group">
+                  {/* Elegant decorative frame */}
+                  <div className="absolute -inset-4 border border-white/10 z-0 hidden lg:block transition-all duration-700 group-hover:-inset-2 group-hover:border-amber-800/50"></div>
                   {author.image && (
                     <Image
                       src={author.image}
                       alt={author.name}
                       fill
-                      className="object-cover rounded-lg shadow-2xl"
+                      className="object-cover relative z-10 filter grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
                     />
                   )}
                 </div>

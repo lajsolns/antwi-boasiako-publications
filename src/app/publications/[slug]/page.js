@@ -157,8 +157,8 @@ export default function BookDetailPage({ params }) {
         <div className="text-center">
           <h1 className="font-merriweather text-3xl font-bold text-gray-900 mb-4">Book Not Found</h1>
           <p className="font-inter text-gray-600 mb-8">The book you're looking for doesn't exist.</p>
-          <Link 
-            href="/publications" 
+          <Link
+            href="/publications"
             className="inline-flex items-center gap-2 px-6 py-3 bg-blue-800 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
           >
             <FiChevronLeft className="w-4 h-4" />
@@ -198,12 +198,13 @@ export default function BookDetailPage({ params }) {
         {/* Left Side - Static Book Image */}
         <div className="w-full lg:w-1/2 lg:sticky lg:top-16 lg:self-start flex items-start justify-center lg:justify-end pt-2 lg:pt-2 px-8 lg:pr-8" style={{ zIndex: 10 }}>
           <div className="w-full max-w-md lg:max-w-md">
-            <div className="relative w-full aspect-[3/4] mb-6">
+            <div className="relative w-full aspect-[3/4] mb-6 group">
+              <div className="absolute inset-4 bg-gray-200 blur-xl opacity-70 transition-opacity duration-500"></div>
               <Image
                 src={book.coverImage}
                 alt={book.title}
                 fill
-                className="object-cover"
+                className="object-cover relative z-10"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
               />
@@ -213,183 +214,184 @@ export default function BookDetailPage({ params }) {
 
         {/* Right Side - Scrollable Content */}
         <div className="w-full lg:w-1/2 lg:self-start">
-          <div className="px-8 py-8">
-            <div className="max-w-md">
-              <div className="mb-4">
-                <span className="font-inter text-xs tracking-widest text-gray-500 uppercase">
-                  DR. ANTWI-BOSIAKO
+          <div className="px-8 py-8 lg:py-16">
+            <div className="max-w-xl">
+              <div className="mb-6">
+                <span className="inline-block font-inter text-xs tracking-[0.2em] text-amber-700 uppercase">
+                  {book.author}
                 </span>
-            </div>
-            <h2 className="font-merriweather text-3xl font-bold text-gray-900 leading-tight mb-1">
-              {book.title}
-            </h2>
-            <div className="font-inter text-sm text-gray-600 mb-1">
-              {book.subtitle}
-            </div>
-            <div className="font-inter text-lg font-medium text-gray-900 mb-1">
-              Africa & International | ${book.internationalPrice}
-            </div>
-            <div className="font-inter text-lg font-medium text-gray-900 mb-4">
-              Ghana | GHS {book.ghanaPrice}
-            </div>
-            <div className="font-inter text-sm text-gray-600 mb-4">
-              VAT included
-            </div>
-
-            <div className="mb-4">
-              <div className="font-inter text-sm font-medium text-gray-800 mb-2">Format</div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setSelectedFormat('paperback')}
-                  className={`px-4 py-2 border text-sm font-medium transition-colors ${
-                    selectedFormat === 'paperback'
-                      ? 'bg-blue-800 text-white border-blue-800'
-                      : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-50'
-                  }`}
-                >
-                  Paperback
-                </button>
-                <button
-                  onClick={() => setSelectedFormat('ebook')}
-                  className={`px-4 py-2 border text-sm font-medium transition-colors ${
-                    selectedFormat === 'ebook'
-                      ? 'bg-blue-800 text-white border-blue-800'
-                      : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-50'
-                  }`}
-                >
-                  Ebook
-                </button>
               </div>
-            </div>
-
-            <div className="mb-4">
-              <div className="font-inter text-sm font-medium text-gray-800 mb-2">Quantity</div>
-              <div className="flex items-center border border-gray-300 rounded w-32">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 border-r border-gray-300"
-                >
-                  −
-                </button>
-                <div className="flex-1 text-center font-inter text-base text-gray-900 py-2">
-                  {quantity}
+              <h1 className="font-playfair text-4xl lg:text-5xl font-normal text-gray-900 leading-tight mb-4 tracking-tight">
+                {book.title}
+              </h1>
+              <div className="w-16 h-[1px] bg-amber-800 mb-6"></div>
+              <div className="font-merriweather text-lg text-gray-600 italic mb-8">
+                {book.subtitle}
+              </div>
+              <div className="flex flex-col space-y-2 mb-10 border-b border-gray-200 pb-8">
+                <div className="font-inter text-xl font-medium text-gray-900">
+                  <span className="text-sm font-normal text-gray-500 mr-2 uppercase tracking-wider">Intl</span>
+                  ${book.internationalPrice}
                 </div>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 border-l border-gray-300"
-                >
-                  +
-                </button>
+                <div className="font-inter text-xl font-medium text-gray-900">
+                  <span className="text-sm font-normal text-gray-500 mr-2 uppercase tracking-wider">GH</span>
+                  GHS {book.ghanaPrice}
+                  <span className="ml-3 font-inter text-xs font-normal text-gray-400 tracking-wide uppercase">VAT included</span>
+                </div>
               </div>
+
+              <div className="mb-8">
+                <div className="font-inter text-xs tracking-[0.15em] font-medium text-gray-400 uppercase mb-4">Select Format</div>
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setSelectedFormat('paperback')}
+                    className={`px-6 py-3 border font-inter text-sm tracking-wider uppercase transition-all duration-300 ${selectedFormat === 'paperback'
+                      ? 'bg-gray-900 text-white border-gray-900'
+                      : 'bg-transparent text-gray-600 border-gray-300 hover:border-gray-900 hover:text-gray-900'
+                      }`}
+                  >
+                    Paperback
+                  </button>
+                  <button
+                    onClick={() => setSelectedFormat('ebook')}
+                    className={`px-6 py-3 border font-inter text-sm tracking-wider uppercase transition-all duration-300 ${selectedFormat === 'ebook'
+                      ? 'bg-gray-900 text-white border-gray-900'
+                      : 'bg-transparent text-gray-600 border-gray-300 hover:border-gray-900 hover:text-gray-900'
+                      }`}
+                  >
+                    Ebook
+                  </button>
+                </div>
+              </div>
+
+              <div className="mb-10">
+                <div className="font-inter text-xs tracking-[0.15em] font-medium text-gray-400 uppercase mb-4">Quantity</div>
+                <div className="flex items-center border border-gray-300 w-32 transition-colors duration-300 hover:border-gray-500">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="px-4 py-3 text-gray-400 hover:text-gray-900 transition-colors"
+                  >
+                    −
+                  </button>
+                  <div className="flex-1 text-center font-inter text-base text-gray-900 py-3">
+                    {quantity}
+                  </div>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="px-4 py-3 text-gray-400 hover:text-gray-900 transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onClick={handleAddToCart}
+                className="w-full px-8 py-5 bg-gray-900 text-white border border-gray-900 hover:bg-transparent hover:text-gray-900 transition-all duration-300 font-inter text-sm tracking-[0.2em] shadow-lg shadow-gray-900/10 uppercase"
+              >
+                Add to Cart
+              </button>
             </div>
 
-            <button
-              onClick={handleAddToCart}
-              className="w-full px-6 py-3 bg-blue-800 text-white font-inter text-base font-medium rounded hover:bg-blue-700 transition-colors"
-            >
-              Add to Cart
-            </button>
+            {/* Synopsis */}
+            <section className="mb-12">
+              <h2 className="font-playfair text-2xl font-normal text-gray-900 mb-6">Synopsis</h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="font-inter text-gray-600 font-light leading-relaxed">
+                  {book.description}
+                </p>
+              </div>
+            </section>
+
+            {/* About This Book */}
+            <section className="mb-12">
+              <h2 className="font-playfair text-2xl font-normal text-gray-900 mb-6">About This Book</h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="font-inter text-gray-600 font-light leading-relaxed">
+                  {book.longDescription}
+                </p>
+              </div>
+            </section>
+
+            {/* Praise for this Book */}
+            <section className="mb-16">
+              <h2 className="font-playfair text-2xl font-normal text-gray-900 mb-8">Praise for this Book</h2>
+              <div className="space-y-8">
+                <div className="border-l-[1px] border-amber-800 pl-6">
+                  <p className="font-merriweather text-gray-600 italic leading-relaxed">
+                    "Dr. Antwi-Boasiako's work has become essential reading for our cybersecurity program. The Republic provides unparalleled insights into Ghana's digital security evolution."
+                  </p>
+                  <p className="font-inter text-xs tracking-widest uppercase text-gray-400 mt-4">— Prof. Kofi Annan Center, Academic Institution</p>
+                </div>
+                <div className="border-l-[1px] border-amber-800 pl-6">
+                  <p className="font-merriweather text-gray-600 italic leading-relaxed">
+                    "The 10 Commandments framework transformed how we approach national cybersecurity strategy. Clear, actionable, and based on real-world experience."
+                  </p>
+                  <p className="font-inter text-xs tracking-widest uppercase text-gray-400 mt-4">— Sarah Johnson, Cybersecurity Analyst</p>
+                </div>
+                <div className="border-l-[1px] border-amber-800 pl-6">
+                  <p className="font-merriweather text-gray-600 italic leading-relaxed">
+                    "Digital Transformation is the most comprehensive guide I've found for leading organizational change. Dr. Antwi-Boasiako's expertise shines through every chapter."
+                  </p>
+                  <p className="font-inter text-xs tracking-widest uppercase text-gray-400 mt-4">— Michael Chen, Digital Transformation Consultant</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Product Details */}
+            <section className="mb-16">
+              <h2 className="font-playfair text-2xl font-normal text-gray-900 mb-8">Product Details</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2">
+                <div className="space-y-0">
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">ISBN:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.isbn}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Pages:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.pages}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Language:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.language}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Published:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.published}</span>
+                  </div>
+                </div>
+                <div className="space-y-0">
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Format:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.format}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Trim Size:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.trimSize}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Weight:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.weight}</span>
+                  </div>
+                  <div className="flex justify-between py-3 border-b border-gray-100">
+                    <span className="font-inter text-sm font-light text-gray-500">Publisher:</span>
+                    <span className="font-inter text-sm text-gray-900">{book.publisher}</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* About the Author */}
+            <section className="mb-8">
+              <h2 className="font-playfair text-2xl font-normal text-gray-900 mb-6">About the Author</h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="font-inter text-gray-600 font-light leading-relaxed">
+                  {book.authorBio}
+                </p>
+              </div>
+            </section>
           </div>
-
-          {/* Synopsis */}
-          <section className="mb-12">
-            <h2 className="font-merriweather text-2xl font-bold text-gray-900 mb-6">Synopsis</h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="font-inter text-gray-700 leading-relaxed">
-                {book.description}
-              </p>
-            </div>
-          </section>
-
-          {/* About This Book */}
-          <section className="mb-12">
-            <h2 className="font-merriweather text-2xl font-bold text-gray-900 mb-6">About This Book</h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="font-inter text-gray-700 leading-relaxed">
-                {book.longDescription}
-              </p>
-            </div>
-          </section>
-
-          {/* Praise for this Book */}
-          <section className="mb-12">
-            <h2 className="font-merriweather text-2xl font-bold text-gray-900 mb-6">Praise for this Book</h2>
-            <div className="space-y-6">
-              <div className="border-l-4 border-blue-500 pl-4">
-                <p className="font-inter text-gray-700 italic">
-                  "Dr. Antwi-Boasiako's work has become essential reading for our cybersecurity program. The Republic provides unparalleled insights into Ghana's digital security evolution."
-                </p>
-                <p className="font-inter text-sm text-gray-600 mt-2">— Prof. Kofi Annan Center, Academic Institution</p>
-              </div>
-              <div className="border-l-4 border-blue-500 pl-4">
-                <p className="font-inter text-gray-700 italic">
-                  "The 10 Commandments framework transformed how we approach national cybersecurity strategy. Clear, actionable, and based on real-world experience."
-                </p>
-                <p className="font-inter text-sm text-gray-600 mt-2">— Sarah Johnson, Cybersecurity Analyst</p>
-              </div>
-              <div className="border-l-4 border-blue-500 pl-4">
-                <p className="font-inter text-gray-700 italic">
-                  "Digital Transformation is the most comprehensive guide I've found for leading organizational change. Dr. Antwi-Boasiako's expertise shines through every chapter."
-                </p>
-                <p className="font-inter text-sm text-gray-600 mt-2">— Michael Chen, Digital Transformation Consultant</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Product Details */}
-          <section className="mb-12">
-            <h2 className="font-merriweather text-2xl font-bold text-gray-900 mb-6">Product Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">ISBN:</span>
-                  <span className="font-inter text-gray-900">{book.isbn}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Pages:</span>
-                  <span className="font-inter text-gray-900">{book.pages}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Language:</span>
-                  <span className="font-inter text-gray-900">{book.language}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Published:</span>
-                  <span className="font-inter text-gray-900">{book.published}</span>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Format:</span>
-                  <span className="font-inter text-gray-900">{book.format}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Trim Size:</span>
-                  <span className="font-inter text-gray-900">{book.trimSize}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Weight:</span>
-                  <span className="font-inter text-gray-900">{book.weight}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-200">
-                  <span className="font-inter text-gray-600">Publisher:</span>
-                  <span className="font-inter text-gray-900">{book.publisher}</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* About the Author */}
-          <section>
-            <h2 className="font-merriweather text-2xl font-bold text-gray-900 mb-6">About the Author</h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="font-inter text-gray-700 leading-relaxed">
-                {book.authorBio}
-              </p>
-            </div>
-          </section>
         </div>
-      </div>
       </main>
 
       {/* You May Also Like Section */}
@@ -402,10 +404,10 @@ export default function BookDetailPage({ params }) {
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 bg-blue-800 text-white p-3 rounded-full shadow-lg hover:bg-blue-900 transition-all duration-300 z-40 group"
+          className="fixed bottom-8 right-8 bg-gray-900 text-white p-4 shadow-xl hover:bg-amber-800 transition-colors duration-300 z-40 group"
           aria-label="Back to top"
         >
-          <FiChevronUp className="w-5 h-5 group-hover:translate-y-[-2px] transition-transform duration-300" />
+          <FiChevronUp className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1" />
         </button>
       )}
     </div>

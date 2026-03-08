@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import PublicationsHeader from '@/components/PublicationsHeader';
 import PublicationsFooter from '@/components/PublicationsFooter';
 
@@ -114,33 +115,40 @@ export default function GalleryPage() {
             <main className="flex-grow w-full pt-12 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {/* Header Section */}
-                    <div className="text-center mb-16 space-y-4">
-                        <h1 className="font-serif text-4xl md:text-5xl text-gray-900 tracking-tight">
+                    <div className="text-center mb-20 space-y-4">
+                        <span className="inline-block font-inter text-xs tracking-[0.2em] text-gray-500 uppercase">
+                            Gallery
+                        </span>
+                        <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 mb-6 tracking-tight">
                             Visual Journey
                         </h1>
-                        <p className="font-inter text-gray-600 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                        <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
+                        <p className="font-inter text-lg text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
                             A curated collection of moments from our literary events, book launches,
                             and the vibrant community that brings our stories to life.
                         </p>
-                        <div className="w-24 h-1 bg-amber-700 mx-auto mt-6"></div>
                     </div>
 
                     {/* Gallery Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                         {galleryItems.map((item) => (
-                            <div
+                            <Link
+                                href={`/publications/gallery/${item.id}`}
                                 key={item.id}
                                 className="group cursor-pointer flex flex-col space-y-4"
                             >
                                 {/* Image Container */}
-                                <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 shadow-sm transition-shadow duration-300 group-hover:shadow-md">
+                                <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 border border-gray-100/50 shadow-sm transition-shadow duration-300 group-hover:shadow-md">
                                     <Image
                                         src={item.src}
                                         alt={item.title}
                                         fill
                                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0"
-                                        sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
+
+                                    {/* Muted overlay that disappears on hover */}
+                                    <div className="absolute inset-0 bg-stone-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0"></div>
 
                                     {/* Badge */}
                                     <div className="absolute top-4 left-4 z-10">
@@ -152,14 +160,17 @@ export default function GalleryPage() {
 
                                 {/* Caption / Details */}
                                 <div className="text-center space-y-1">
-                                    <h3 className="font-serif text-xl text-gray-900 group-hover:text-amber-800 transition-colors duration-300">
+                                    <h3 className="font-playfair text-xl text-gray-900 group-hover:text-amber-800 transition-colors duration-300">
                                         {item.title}
                                     </h3>
                                     <p className="font-inter text-sm text-gray-500 uppercase tracking-wide">
                                         {item.date}
                                     </p>
+                                    <span className="inline-block mt-4 border-b border-transparent group-hover:border-amber-800 font-inter text-[10px] tracking-[0.2em] uppercase text-amber-800 transition-colors duration-300">
+                                        View Details
+                                    </span>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 

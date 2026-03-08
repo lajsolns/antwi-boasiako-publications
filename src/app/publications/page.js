@@ -646,20 +646,30 @@ export default function PublicationsPage() {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto text-center mt-12">
-            <h1 className="font-merriweather text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in tracking-tight drop-shadow-sm">
-              Antwi-Boasiako Publications
+          <div className="relative z-10 max-w-4xl mx-auto text-center mt-12 pb-12">
+            <span className="inline-block font-inter text-[10px] md:text-xs tracking-[0.4em] text-white/60 uppercase mb-8 animate-fade-in">
+              Establishing an Intellectual Legacy
+            </span>
+            <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-normal text-white mb-10 animate-fade-in tracking-tight leading-[1.1]">
+              Antwi-Boasiako <br className="hidden md:block" /> Publications
             </h1>
-            <p className="font-inter text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-delay font-light">
-              Sharing the intellectual works of Dr. Albert Antwi-Boasiako
+            <div className="w-16 h-[1px] bg-white/40 mx-auto mb-10 animate-fade-in"></div>
+            <p className="font-playfair text-xl md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-12 animate-fade-in-delay italic font-light">
+              "Sharing the intellectual and professional works of Dr. Albert Antwi-Boasiako"
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-delay">
-              <button className="px-10 py-4 bg-white text-gray-900 border border-white font-inter text-sm font-medium uppercase tracking-widest hover:bg-transparent hover:text-white transition-all duration-300">
+              <Link
+                href="/publications/all-books"
+                className="px-10 py-4 bg-white text-gray-900 border border-white font-inter text-[10px] tracking-[0.2em] uppercase hover:bg-transparent hover:text-white transition-all duration-500"
+              >
                 Browse Collection
-              </button>
-              <button className="px-10 py-4 bg-transparent text-white border border-white/60 font-inter text-sm font-medium uppercase tracking-widest hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300">
+              </Link>
+              <Link
+                href="/publications/events"
+                className="px-10 py-4 bg-transparent text-white border border-white/40 font-inter text-[10px] tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-500"
+              >
                 Forthcoming Works
-              </button>
+              </Link>
             </div>
           </div>
         </section>
