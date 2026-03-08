@@ -778,7 +778,22 @@ export default function PublicationsPage() {
                 Add to cart
               </button> */}
 
-                <button type="button" className="w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase cursor-pointer mb-4 hover:bg-transparent hover:border-gray-900 hover:text-gray-900 transition-all duration-300">
+                <button
+                  type="button"
+                  className="w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase cursor-pointer mb-4 hover:bg-transparent hover:border-gray-900 hover:text-gray-900 transition-all duration-300"
+                  onClick={() => {
+                    addToCart({
+                      id: 1,
+                      title: 'The Republic',
+                      image: '/image/books/the_republic.png',
+                      internationalPrice: 35.00,
+                      africaPrice: 35.00,
+                      ghanaPrice: 350,
+                      quantity: newReleaseQuantity,
+                      format: 'Paperback'
+                    });
+                  }}
+                >
                   Add to Cart
                 </button>
 

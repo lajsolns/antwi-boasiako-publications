@@ -48,6 +48,7 @@ const PublicationsCheckoutForm = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [paystackInstance, setPaystackInstance] = useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState('ship'); // 'ship' or 'pickup'
+    const [showLocationDropdown, setShowLocationDropdown] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -61,6 +62,29 @@ const PublicationsCheckoutForm = () => {
     });
 
     const [formErrors, setFormErrors] = useState({});
+
+    const getLocationDisplay = () => {
+        if (!userLocation) return 'International ($)';
+        const symbols = { ghana: 'GHS', international: '$', africa: '$' };
+        return `${userLocation.country} (${symbols[userLocation.pricing] || '$'})`;
+    };
+
+    const handleLocationChange = (location) => {
+        setManualLocation(location);
+        setShowLocationDropdown(false);
+        window.location.reload();
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (showLocationDropdown && !event.target.closest('.location-dropdown-pub')) {
+                setShowLocationDropdown(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [showLocationDropdown]);
 
     useEffect(() => {
         const initializePaystack = async () => {
@@ -168,6 +192,65 @@ const PublicationsCheckoutForm = () => {
 
                         {currentStep === 'details' ? (
                             <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+
+                                {/* Pricing Region Selector */}
+                                <section className="space-y-2">
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Pricing Region</h2>
+                                    <div className="location-dropdown-pub relative flex items-center justify-between p-5 border border-gray-100 bg-gray-50/40">
+                                        <div className="flex items-center gap-3">
+                                            <FiGlobe className="text-amber-800 w-4 h-4 flex-shrink-0" />
+                                            <div>
+                                                <p className="font-inter text-xs text-gray-900 font-medium">
+                                                    {isLocationLoading ? 'Detecting location...' : getLocationDisplay()}
+                                                </p>
+                                                <p className="font-inter text-[10px] text-gray-400 mt-0.5 tracking-wider">
+                                                    Select your region to see the correct pricing
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowLocationDropdown(!showLocationDropdown)}
+                                            className="font-inter text-[10px] tracking-widest uppercase text-amber-800 border border-amber-800/30 px-4 py-2 hover:bg-amber-50 transition-colors duration-200 flex-shrink-0"
+                                        >
+                                            Change
+                                        </button>
+
+                                        {showLocationDropdown && (
+                                            <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-gray-100 shadow-xl z-50">
+                                                <div className="p-2 space-y-1">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleLocationChange({
+                                                            country: 'Ghana',
+                                                            countryCode: 'GH',
+                                                            region: 'ghana',
+                                                            pricing: 'ghana'
+                                                        })}
+                                                        className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors text-left group"
+                                                    >
+                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">Ghana</span>
+                                                        <span className="font-inter text-xs text-gray-400">GHS</span>
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleLocationChange({
+                                                            country: 'International',
+                                                            countryCode: null,
+                                                            region: 'international',
+                                                            pricing: 'international'
+                                                        })}
+                                                        className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors text-left group"
+                                                    >
+                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">International</span>
+                                                        <span className="font-inter text-xs text-gray-400">$</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </section>
+
                                 {/* Contact Section */}
                                 <section className="space-y-6">
                                     <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Contact Details</h2>
@@ -227,7 +310,7 @@ const PublicationsCheckoutForm = () => {
                                         >
                                             <div className="flex items-center gap-4">
                                                 <FiTruck className={`${deliveryMethod === 'ship' ? 'text-amber-800' : 'text-gray-400'}`} />
-                                                <span className="font-inter text-sm text-gray-700">Archival Shipping</span>
+                                                <span className="font-inter text-sm text-gray-700">Shipping</span>
                                             </div>
                                             {deliveryMethod === 'ship' && <FiCheckCircle className="text-amber-800 w-4 h-4" />}
                                         </button>
@@ -251,9 +334,57 @@ const PublicationsCheckoutForm = () => {
                                                     name="address"
                                                     value={formData.address}
                                                     onChange={handleInputChange}
-                                                    className={`w-full p-4 border ${formErrors.address ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light h-32`}
+                                                    className={`w-full p-4 border ${formErrors.address ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light h-24`}
                                                     placeholder="House No, Street Name, etc."
                                                 />
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">City</label>
+                                                    <input
+                                                        type="text"
+                                                        name="city"
+                                                        value={formData.city}
+                                                        onChange={handleInputChange}
+                                                        className={`w-full p-4 border ${formErrors.city ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
+                                                        placeholder="Accra"
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">State / Region</label>
+                                                    <input
+                                                        type="text"
+                                                        name="state"
+                                                        value={formData.state}
+                                                        onChange={handleInputChange}
+                                                        className={`w-full p-4 border ${formErrors.state ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
+                                                        placeholder="Greater Accra"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Postal Code</label>
+                                                    <input
+                                                        type="text"
+                                                        name="postalCode"
+                                                        value={formData.postalCode}
+                                                        onChange={handleInputChange}
+                                                        className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light"
+                                                        placeholder="GA-000-0000"
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Famous Landmark <span className="normal-case text-gray-300">(Optional)</span></label>
+                                                    <input
+                                                        type="text"
+                                                        name="landmark"
+                                                        value={formData.landmark}
+                                                        onChange={handleInputChange}
+                                                        className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light"
+                                                        placeholder="Near Accra Mall"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     ) : (
@@ -381,7 +512,7 @@ const PublicationsCheckoutForm = () => {
                             <div className="mt-8 flex items-center gap-3 p-4 bg-gray-50/50 border border-gray-100">
                                 <FiInfo className="text-amber-800 w-4 h-4 flex-shrink-0" />
                                 <p className="font-inter text-[9px] text-gray-500 leading-relaxed uppercase tracking-wider">
-                                    Our intellectual property transactions are handled with the highest archival standards of security.
+                                    We will contact you within 24 hours to arrange delivery and confirm the shipping cost, which will be covered by you based on your preferred delivery option.
                                 </p>
                             </div>
                         </div>

@@ -85,7 +85,7 @@ const PublicationsCartSidebar = () => {
                                             Your curated collection of intellectual works will appear here once selected.
                                         </p>
                                         <button
-                                            onClick={() => setIsCartOpen(false)}
+                                            onClick={() => { setIsCartOpen(false); router.push('/publications/all-books'); }}
                                             className="px-8 py-3 bg-gray-900 text-white hover:bg-amber-900 transition-all duration-300 font-inter text-xs tracking-[0.2em] uppercase"
                                         >
                                             Continue Exploring
