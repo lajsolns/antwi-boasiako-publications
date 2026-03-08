@@ -8,9 +8,14 @@ import { RiCloseLine } from 'react-icons/ri';
 import { Button } from './button';
 import Link from 'next/link';
 import CheckOutModal from '@/componentData/Book/CheckOutModal';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const CartDrawer = () => {
+  const pathname = usePathname();
+  const isPublicationsPage = pathname?.startsWith('/publications');
+
+  if (isPublicationsPage) return null;
+
   const {
     cartItems,
     isCartOpen,

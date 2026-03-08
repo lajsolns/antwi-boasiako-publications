@@ -36,11 +36,11 @@ const storeLocations = [
 
 const CheckoutForm = () => {
   const router = useRouter();
-  const { 
-    cartItems, 
-    getCartTotal, 
-    clearCart, 
-    userLocation, 
+  const {
+    cartItems,
+    getCartTotal,
+    clearCart,
+    userLocation,
     isLocationLoading,
     getItemPrice,
     getPriceDisplay,
@@ -313,7 +313,7 @@ const CheckoutForm = () => {
     if (!userLocation || isLocationLoading) {
       return cartItems.reduce((total, item) => total + (item.internationalPrice * item.quantity), 0);
     }
-    
+
     return cartItems.reduce((total, item) => total + (getItemPrice(item) * item.quantity), 0);
   };
 
@@ -335,7 +335,7 @@ const CheckoutForm = () => {
     if (!userLocation || isLocationLoading) {
       return `$ ${price.toFixed(2)}`;
     }
-    
+
     if (userLocation.pricing === 'ghana') {
       return `GHS ${price.toFixed(2)}`;
     }
@@ -344,7 +344,7 @@ const CheckoutForm = () => {
 
   const validateForm = () => {
     const errors = {};
-    
+
     // Contact Details Validation
     if (!formData.firstName.trim()) {
       errors.firstName = 'First name is required';
@@ -386,7 +386,7 @@ const CheckoutForm = () => {
       if (!selectedCountry) {
         errors.country = 'Country is required';
       }
-      
+
       if (!formData.address.trim()) {
         errors.address = 'Address is required';
       } else if (formData.address.trim().length < 5) {
@@ -482,7 +482,7 @@ const CheckoutForm = () => {
         setShowLocationDropdown(false);
       }
     };
-    
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -517,7 +517,7 @@ const CheckoutForm = () => {
         }
 
         // console.log('Loading Paystack...');
-        
+
         // Load Paystack script
         const script = document.createElement('script');
         script.src = 'https://js.paystack.co/v1/inline.js';
@@ -541,7 +541,7 @@ const CheckoutForm = () => {
     const initializePaystackConfig = () => {
       try {
         // console.log('Paystack script loaded successfully');
-        
+
         // Convert amount based on detected location, not selected country
         let amount;
         if (!userLocation || isLocationLoading) {
@@ -614,14 +614,14 @@ const CheckoutForm = () => {
               }
             ]
           },
-          callback: function(response) {
+          callback: function (response) {
             (async () => {
               console.log('Payment successful! Reference:', response);
               try {
                 // Store payment reference in localStorage
                 localStorage.setItem('paymentReference', response.reference);
                 // console.log('Payment reference stored in localStorage');
-                
+
                 // Send order confirmation email
                 const emailData = {
                   orderData: {
@@ -644,7 +644,7 @@ const CheckoutForm = () => {
                     postalCode: formData.postalCode,
                     landmark: formData.landmark,
                     country: selectedCountry,
-                    pickupLocation: deliveryMethod === 'pickup' 
+                    pickupLocation: deliveryMethod === 'pickup'
                       ? storeLocations.find(loc => loc.id === formData.pickupLocation)
                       : null
                   },
@@ -660,7 +660,7 @@ const CheckoutForm = () => {
                     total: calculateTotal()
                   }
                 };
-  
+
                 try {
                   const emailResponse = await fetch('/api/order-confirmation', {
                     method: 'POST',
@@ -669,7 +669,7 @@ const CheckoutForm = () => {
                     },
                     body: JSON.stringify(emailData)
                   });
-  
+
                   if (emailResponse.ok) {
                     // console.log('Order confirmation email sent successfully');
                   } else {
@@ -678,11 +678,11 @@ const CheckoutForm = () => {
                 } catch (emailError) {
                   console.error('Error sending order confirmation email:', emailError);
                 }
-                
+
                 // Clear cart and close modal
                 clearCart();
                 // console.log('Cart cleared');
-                
+
                 // Use Next.js router for navigation
                 // console.log('Navigating to success page...');
                 router.push('/success');
@@ -729,7 +729,7 @@ const CheckoutForm = () => {
 
     // console.log('Initializing payment...');
     setIsProcessing(true);
-    
+
     try {
       // console.log('Calling Paystack payment...');
       // console.log('Paystack instance:', paystackInstance);
@@ -747,202 +747,196 @@ const CheckoutForm = () => {
         isOpen={isShippingPolicyOpen}
         onClose={() => setIsShippingPolicyOpen(false)}
       />
-      <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="max-w-7xl mx-auto min-h-screen border border-stone-700 rounded-lg"
-    >
-      <div className="w-full flex md:flex-row flex-col">
-        <div className="w-full md:w-3/5 p-4 md:p-4 p-3 border-r border-[#464646] overflow-y-auto">
-          {currentStep === 'details' ? (
-            <>
-              <div className="max-w-2xl mx-auto">
-                <h2 className="text-lg text-white mb-6">Contact</h2>
-                
-                {/* Location Selector */}
-                <div className="mb-6 p-4 bg-[#1C1917] rounded-lg border border-stone-600">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <FaGlobe className="h-5 w-5 text-stone-400" />
-                      <span className="text-stone-400 text-sm">Pricing Region:</span>
-                      <span className="text-white font-medium">{getLocationDisplay()}</span>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="max-w-7xl mx-auto min-h-screen border border-stone-700 rounded-lg"
+      >
+        <div className="w-full flex md:flex-row flex-col">
+          <div className="w-full md:w-3/5 p-4 md:p-4 p-3 border-r border-[#464646] overflow-y-auto">
+            {currentStep === 'details' ? (
+              <>
+                <div className="max-w-2xl mx-auto">
+                  <h2 className="text-lg text-white mb-6">Contact</h2>
+
+                  {/* Location Selector */}
+                  <div className="mb-6 p-4 bg-[#1C1917] rounded-lg border border-stone-600">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <FaGlobe className="h-5 w-5 text-stone-400" />
+                        <span className="text-stone-400 text-sm">Pricing Region:</span>
+                        <span className="text-white font-medium">{getLocationDisplay()}</span>
+                      </div>
+                      <div className="relative location-dropdown">
+                        <button
+                          onClick={() => setShowLocationDropdown(!showLocationDropdown)}
+                          className="px-3 py-1 bg-stone-700 hover:bg-stone-600 text-white text-sm rounded transition-colors"
+                        >
+                          Change
+                        </button>
+
+                        {showLocationDropdown && (
+                          <div className="absolute right-0 mt-2 w-48 bg-[#1C1917] border border-stone-600 rounded-lg shadow-lg z-50">
+                            <div className="py-2">
+                              <button
+                                onClick={() => handleLocationChange({
+                                  country: 'Ghana',
+                                  countryCode: 'GH',
+                                  region: 'ghana',
+                                  pricing: 'ghana'
+                                })}
+                                className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
+                              >
+                                Ghana (GHS)
+                              </button>
+                              <button
+                                onClick={() => handleLocationChange({
+                                  country: 'International',
+                                  countryCode: null,
+                                  region: 'international',
+                                  pricing: 'international'
+                                })}
+                                className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
+                              >
+                                International ($)
+                              </button>
+                              <button
+                                onClick={() => handleLocationChange({
+                                  country: 'Africa',
+                                  countryCode: null,
+                                  region: 'africa',
+                                  pricing: 'africa'
+                                })}
+                                className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
+                              >
+                                Africa ($)
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="relative location-dropdown">
-                      <button
-                        onClick={() => setShowLocationDropdown(!showLocationDropdown)}
-                        className="px-3 py-1 bg-stone-700 hover:bg-stone-600 text-white text-sm rounded transition-colors"
-                      >
-                        Change
-                      </button>
-                      
-                      {showLocationDropdown && (
-                        <div className="absolute right-0 mt-2 w-48 bg-[#1C1917] border border-stone-600 rounded-lg shadow-lg z-50">
-                          <div className="py-2">
+                    <p className="text-stone-500 text-xs mt-2">
+                      Select your region to see the correct pricing
+                    </p>
+                  </div>
+
+                  <form className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-stone-400 mb-2 text-sm md:text-base">First Name</label>
+                        <input
+                          type="text"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.firstName ? 'border-red-500' : 'border-stone-600'
+                            } focus:border-white focus:outline-none text-sm md:text-base`}
+                          required
+                        />
+                        {formErrors.firstName && (
+                          <p className="text-red-500 text-sm mt-1">{formErrors.firstName}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-stone-400 mb-2 text-sm md:text-base">Last Name</label>
+                        <input
+                          type="text"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.lastName ? 'border-red-500' : 'border-stone-600'
+                            } focus:border-white focus:outline-none text-sm md:text-base`}
+                          required
+                        />
+                        {formErrors.lastName && (
+                          <p className="text-red-500 text-sm mt-1">{formErrors.lastName}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-stone-400 mb-2 text-sm md:text-base">Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.email ? 'border-red-500' : 'border-stone-600'
+                            } focus:border-white focus:outline-none text-sm md:text-base`}
+                          required
+                        />
+                        {formErrors.email && (
+                          <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-stone-400 mb-2 text-sm md:text-base">Phone Number</label>
+                        {userLocation?.pricing === 'ghana' ? (
+                          <PhoneInput
+                            country="gh"
+                            value={phoneNumber}
+                            onChange={handlePhoneChange}
+                            inputClass={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.phone ? 'border-red-500' : 'border-stone-600'
+                              } focus:border-white focus:outline-none text-sm md:text-base`}
+                            containerClass="w-full"
+                            buttonClass="bg-[#1C1917] border-stone-600"
+                            dropdownClass="bg-[#1C1917] text-white"
+                            inputProps={{
+                              placeholder: "e.g., +233 20 123 4567",
+                              required: true
+                            }}
+                            specialLabel=""
+                            enableSearch={true}
+                            preferredCountries={["gh", "ng", "ci"]}
+                          />
+                        ) : (
+                          <input
+                            type="tel"
+                            value={phoneNumber}
+                            onChange={(e) => handlePhoneChange(e.target.value)}
+                            className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.phone ? 'border-red-500' : 'border-stone-600'
+                              } focus:border-white focus:outline-none text-sm md:text-base`}
+                            placeholder="e.g., +1 555 123 4567"
+                            required
+                          />
+                        )}
+                        {formErrors.phone && (
+                          <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-8">
+                      <h2 className="text-lg text-white mb-4">Delivery Method</h2>
+                      <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-6">
+                        <div className="flex flex-col items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setDeliveryMethod('ship');
+                              // Clear pickup location when switching to shipping
+                              setFormData(prev => ({ ...prev, pickupLocation: '' }));
+                            }}
+                            className={`flex items-center justify-center gap-2 px-6 py-4 md:py-3 rounded-lg transition-colors text-sm md:text-base w-full ${deliveryMethod === 'ship'
+                                ? 'bg-white text-[#1C1917]'
+                                : 'bg-[#1C1917] text-white border border-stone-600'
+                              }`}
+                          >
+                            <FaTruck />
+                            Ship
+                          </button>
+                          <div className="flex items-center justify-center gap-1 w-full">
+                            <FaInfoCircle className="text-xs text-stone-400" />
                             <button
-                              onClick={() => handleLocationChange({
-                                country: 'Ghana',
-                                countryCode: 'GH',
-                                region: 'ghana',
-                                pricing: 'ghana'
-                              })}
-                              className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
+                              type="button"
+                              onClick={() => setIsShippingPolicyOpen(true)}
+                              className="text-xs text-stone-400 hover:text-white transition-colors text-center underline decoration-stone-400 hover:decoration-white"
                             >
-                              Ghana (GHS)
-                            </button>
-                            <button
-                              onClick={() => handleLocationChange({
-                                country: 'International',
-                                countryCode: null,
-                                region: 'international',
-                                pricing: 'international'
-                              })}
-                              className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
-                            >
-                              International ($)
-                            </button>
-                            <button
-                              onClick={() => handleLocationChange({
-                                country: 'Africa',
-                                countryCode: null,
-                                region: 'africa',
-                                pricing: 'africa'
-                              })}
-                              className="block w-full px-4 py-2 text-left text-white hover:bg-stone-600 text-sm"
-                            >
-                              Africa ($)
+                              View our Shipping Policy
                             </button>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
-                  <p className="text-stone-500 text-xs mt-2">
-                    Select your region to see the correct pricing
-                  </p>
-                </div>
-                
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-stone-400 mb-2 text-sm md:text-base">First Name</label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                          formErrors.firstName ? 'border-red-500' : 'border-stone-600'
-                        } focus:border-white focus:outline-none text-sm md:text-base`}
-                        required
-                      />
-                      {formErrors.firstName && (
-                        <p className="text-red-500 text-sm mt-1">{formErrors.firstName}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-stone-400 mb-2 text-sm md:text-base">Last Name</label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                          formErrors.lastName ? 'border-red-500' : 'border-stone-600'
-                        } focus:border-white focus:outline-none text-sm md:text-base`}
-                        required
-                      />
-                      {formErrors.lastName && (
-                        <p className="text-red-500 text-sm mt-1">{formErrors.lastName}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-stone-400 mb-2 text-sm md:text-base">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                          formErrors.email ? 'border-red-500' : 'border-stone-600'
-                        } focus:border-white focus:outline-none text-sm md:text-base`}
-                        required
-                      />
-                      {formErrors.email && (
-                        <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-stone-400 mb-2 text-sm md:text-base">Phone Number</label>
-                      {userLocation?.pricing === 'ghana' ? (
-                        <PhoneInput
-                          country="gh"
-                          value={phoneNumber}
-                          onChange={handlePhoneChange}
-                          inputClass={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                            formErrors.phone ? 'border-red-500' : 'border-stone-600'
-                          } focus:border-white focus:outline-none text-sm md:text-base`}
-                          containerClass="w-full"
-                          buttonClass="bg-[#1C1917] border-stone-600"
-                          dropdownClass="bg-[#1C1917] text-white"
-                          inputProps={{
-                            placeholder: "e.g., +233 20 123 4567",
-                            required: true
-                          }}
-                          specialLabel=""
-                          enableSearch={true}
-                          preferredCountries={["gh", "ng", "ci"]}
-                        />
-                      ) : (
-                        <input
-                          type="tel"
-                          value={phoneNumber}
-                          onChange={(e) => handlePhoneChange(e.target.value)}
-                          className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                            formErrors.phone ? 'border-red-500' : 'border-stone-600'
-                          } focus:border-white focus:outline-none text-sm md:text-base`}
-                          placeholder="e.g., +1 555 123 4567"
-                          required
-                        />
-                      )}
-                      {formErrors.phone && (
-                        <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="mt-8">
-                    <h2 className="text-lg text-white mb-4">Delivery Method</h2>
-                    <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-6">
-                      <div className="flex flex-col items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setDeliveryMethod('ship');
-                            // Clear pickup location when switching to shipping
-                            setFormData(prev => ({ ...prev, pickupLocation: '' }));
-                          }}
-                          className={`flex items-center justify-center gap-2 px-6 py-4 md:py-3 rounded-lg transition-colors text-sm md:text-base w-full ${
-                            deliveryMethod === 'ship'
-                              ? 'bg-white text-[#1C1917]'
-                              : 'bg-[#1C1917] text-white border border-stone-600'
-                          }`}
-                        >
-                          <FaTruck />
-                          Ship
-                        </button>
-                        <div className="flex items-center justify-center gap-1 w-full">
-                          <FaInfoCircle className="text-xs text-stone-400" />
-                          <button
-                            type="button"
-                            onClick={() => setIsShippingPolicyOpen(true)}
-                            className="text-xs text-stone-400 hover:text-white transition-colors text-center underline decoration-stone-400 hover:decoration-white"
-                          >
-                            View our Shipping Policy
-                          </button>
-                        </div>
-                      </div>
-                      {/* <button
+                        {/* <button
                         type="button"
                         onClick={() => {
                           setDeliveryMethod('pickup');
@@ -965,326 +959,234 @@ const CheckoutForm = () => {
                         <FaStore />
                         Pickup in Store
                       </button> */}
-                    </div>
-                    {formErrors.deliveryMethod && (
-                      <p className="text-red-500 text-sm mt-1 mb-4">{formErrors.deliveryMethod}</p>
-                    )}
+                      </div>
+                      {formErrors.deliveryMethod && (
+                        <p className="text-red-500 text-sm mt-1 mb-4">{formErrors.deliveryMethod}</p>
+                      )}
 
-                    {deliveryMethod === 'ship' ? (
-                      <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="md:col-span-2">
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">Country</label>
-                            <select
-                              value={selectedCountry}
-                              onChange={(e) => setSelectedCountry(e.target.value)}
-                              className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                                formErrors.country ? 'border-red-500' : 'border-stone-600'
-                              } focus:border-white focus:outline-none text-sm md:text-base`}
-                            >
-                              {countries.map((country) => (
-                                <option key={country} value={country}>
-                                  {country}
-                                </option>
-                              ))}
-                            </select>
-                            {formErrors.country && (
-                              <p className="text-red-500 text-sm mt-1">{formErrors.country}</p>
-                            )}
-                          </div>
-                          <div className="md:col-span-2">
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">Address</label>
-                            <input
-                              type="text"
-                              name="address"
-                              value={formData.address}
-                              onChange={handleInputChange}
-                              className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                                formErrors.address ? 'border-red-500' : 'border-stone-600'
-                              } focus:border-white focus:outline-none text-sm md:text-base`}
-                              required
-                            />
-                            {formErrors.address && (
-                              <p className="text-red-500 text-sm mt-1">{formErrors.address}</p>
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">City</label>
-                            <input
-                              type="text"
-                              name="city"
-                              value={formData.city}
-                              onChange={handleInputChange}
-                              className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                                formErrors.city ? 'border-red-500' : 'border-stone-600'
-                              } focus:border-white focus:outline-none text-sm md:text-base`}
-                              required
-                            />
-                            {formErrors.city && (
-                              <p className="text-red-500 text-sm mt-1">{formErrors.city}</p>
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">State/Region</label>
-                            <input
-                              type="text"
-                              name="state"
-                              value={formData.state}
-                              onChange={handleInputChange}
-                              className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                                formErrors.state ? 'border-red-500' : 'border-stone-600'
-                              } focus:border-white focus:outline-none text-sm md:text-base`}
-                              required
-                            />
-                            {formErrors.state && (
-                              <p className="text-red-500 text-sm mt-1">{formErrors.state}</p>
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">Postal Code</label>
-                            <input
-                              type="text"
-                              name="postalCode"
-                              value={formData.postalCode}
-                              onChange={handleInputChange}
-                              className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${
-                                formErrors.postalCode ? 'border-red-500' : 'border-stone-600'
-                              } focus:border-white focus:outline-none text-sm md:text-base`}
-                              placeholder="Optional"
-                            />
-                            {formErrors.postalCode && (
-                              <p className="text-red-500 text-sm mt-1">{formErrors.postalCode}</p>
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-stone-400 mb-2 text-sm md:text-base">Famous Landmark</label>
-                            <input
-                              type="text"
-                              name="landmark"
-                              value={formData.landmark}
-                              onChange={handleInputChange}
-                              className="w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border border-stone-600 focus:border-white focus:outline-none text-sm md:text-base"
-                              placeholder="Optional"
-                            />
-                          </div>
-                        </div>
-                        <div className="mt-4 p-4 bg-white/10 border border-white rounded-lg">
-                          <p className="text-white text-sm">
-                            {userLocation?.pricing === 'ghana'
-                              ? 'Currently, delivery is available exclusively within Accra, Ghana for all online purchases through our trusted delivery partner.'
-                              : 'We will contact you within 24 hours to arrange delivery and confirm the shipping cost, which will be covered by you based on your preferred delivery option.'}
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="space-y-4">
-                        <h3 className="text-white font-medium mb-4">Select Pickup Location</h3>
-                        {storeLocations.map(location => (
-                          <div
-                            key={location.id}
-                            className={`p-4 rounded-lg border cursor-pointer transition-colors ${
-                              formData.pickupLocation === location.id
-                                ? 'border-white bg-white/10'
-                                : 'border-stone-600 hover:border-white'
-                            }`}
-                            onClick={() => setFormData(prev => ({ ...prev, pickupLocation: location.id }))}
-                          >
-                            <h4 className="text-white font-medium">{location.name}</h4>
-                            <p className="text-stone-400 text-sm">{location.address}</p>
-                            <p className="text-stone-400 text-sm">{location.phone}</p>
-                          </div>
-                        ))}
-                        {formErrors.pickupLocation && (
-                          <p className="text-red-500 text-sm mt-1">{formErrors.pickupLocation}</p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-4 pb-4">
-                    <div className="mb-6 px-4 py-3 bg-[#2A2522] rounded-lg flex flex-col md:flex-row items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 rounded-full bg-[#09a4da]"></div>
-                        <p className="text-white text-sm">Paystack</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Image src={MasterCard} alt="Mastercard" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={Visa} alt="Visa" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={MTNMomo} alt="MTN Mobile Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={AirtelTigo} alt="AirtelTigo Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                      </div>
-                    </div>
-                    <button 
-                      type="button"
-                      onClick={handleContinue}
-                      className="h-[50px] md:h-[45px] w-full bg-white text-center text-sm md:text-base rounded-lg font-medium hover:bg-stone-100 transition-colors"
-                    >
-                      Continue to Payment
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="max-w-2xl mx-auto">
-                <h2 className="text-lg text-white mb-6">Contact</h2>
-                <div className="flex flex-col gap-6">
-                  <div className="bg-stone-800/50 p-4 rounded-lg">
-                    <h3 className="text-white font-medium mb-3">Contact Information</h3>
-                    <div className="text-stone-300 text-sm">
-                      <p>{formData.firstName} {formData.lastName}</p>
-                      <p>{formData.email}</p>
-                      <p>{phoneNumber}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-stone-800/50 p-4 rounded-lg">
-                    <h3 className="text-white font-medium mb-3">
-                      {deliveryMethod === 'ship' ? 'Shipping Address' : 'Pickup Location'}
-                    </h3>
-                    <div className="text-stone-300 text-sm">
                       {deliveryMethod === 'ship' ? (
                         <>
-                          <p>{formData.address}</p>
-                          <p>{formData.city}, {formData.state} {formData.postalCode}</p>
-                          {formData.landmark && <p>Landmark: {formData.landmark}</p>}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="md:col-span-2">
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">Country</label>
+                              <select
+                                value={selectedCountry}
+                                onChange={(e) => setSelectedCountry(e.target.value)}
+                                className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.country ? 'border-red-500' : 'border-stone-600'
+                                  } focus:border-white focus:outline-none text-sm md:text-base`}
+                              >
+                                {countries.map((country) => (
+                                  <option key={country} value={country}>
+                                    {country}
+                                  </option>
+                                ))}
+                              </select>
+                              {formErrors.country && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.country}</p>
+                              )}
+                            </div>
+                            <div className="md:col-span-2">
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">Address</label>
+                              <input
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleInputChange}
+                                className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.address ? 'border-red-500' : 'border-stone-600'
+                                  } focus:border-white focus:outline-none text-sm md:text-base`}
+                                required
+                              />
+                              {formErrors.address && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.address}</p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">City</label>
+                              <input
+                                type="text"
+                                name="city"
+                                value={formData.city}
+                                onChange={handleInputChange}
+                                className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.city ? 'border-red-500' : 'border-stone-600'
+                                  } focus:border-white focus:outline-none text-sm md:text-base`}
+                                required
+                              />
+                              {formErrors.city && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.city}</p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">State/Region</label>
+                              <input
+                                type="text"
+                                name="state"
+                                value={formData.state}
+                                onChange={handleInputChange}
+                                className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.state ? 'border-red-500' : 'border-stone-600'
+                                  } focus:border-white focus:outline-none text-sm md:text-base`}
+                                required
+                              />
+                              {formErrors.state && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.state}</p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">Postal Code</label>
+                              <input
+                                type="text"
+                                name="postalCode"
+                                value={formData.postalCode}
+                                onChange={handleInputChange}
+                                className={`w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border ${formErrors.postalCode ? 'border-red-500' : 'border-stone-600'
+                                  } focus:border-white focus:outline-none text-sm md:text-base`}
+                                placeholder="Optional"
+                              />
+                              {formErrors.postalCode && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.postalCode}</p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-stone-400 mb-2 text-sm md:text-base">Famous Landmark</label>
+                              <input
+                                type="text"
+                                name="landmark"
+                                value={formData.landmark}
+                                onChange={handleInputChange}
+                                className="w-full bg-[#1C1917] text-white rounded-lg px-4 py-3 md:py-2 border border-stone-600 focus:border-white focus:outline-none text-sm md:text-base"
+                                placeholder="Optional"
+                              />
+                            </div>
+                          </div>
+                          <div className="mt-4 p-4 bg-white/10 border border-white rounded-lg">
+                            <p className="text-white text-sm">
+                              {userLocation?.pricing === 'ghana'
+                                ? 'Currently, delivery is available exclusively within Accra, Ghana for all online purchases through our trusted delivery partner.'
+                                : 'We will contact you within 24 hours to arrange delivery and confirm the shipping cost, which will be covered by you based on your preferred delivery option.'}
+                            </p>
+                          </div>
                         </>
                       ) : (
-                        <>
-                          {storeLocations.find(loc => loc.id === formData.pickupLocation) && (
-                            <>
-                              <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).name}</p>
-                              <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).address}</p>
-                              <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).phone}</p>
-                            </>
+                        <div className="space-y-4">
+                          <h3 className="text-white font-medium mb-4">Select Pickup Location</h3>
+                          {storeLocations.map(location => (
+                            <div
+                              key={location.id}
+                              className={`p-4 rounded-lg border cursor-pointer transition-colors ${formData.pickupLocation === location.id
+                                  ? 'border-white bg-white/10'
+                                  : 'border-stone-600 hover:border-white'
+                                }`}
+                              onClick={() => setFormData(prev => ({ ...prev, pickupLocation: location.id }))}
+                            >
+                              <h4 className="text-white font-medium">{location.name}</h4>
+                              <p className="text-stone-400 text-sm">{location.address}</p>
+                              <p className="text-stone-400 text-sm">{location.phone}</p>
+                            </div>
+                          ))}
+                          {formErrors.pickupLocation && (
+                            <p className="text-red-500 text-sm mt-1">{formErrors.pickupLocation}</p>
                           )}
-                        </>
+                        </div>
                       )}
                     </div>
-                  </div>
 
-                  <div className="pt-4 pb-4">
-                    <div className="mb-6 px-4 py-3 bg-[#2A2522] rounded-lg flex flex-col md:flex-row items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 rounded-full bg-[#09a4da]"></div>
-                        <p className="text-white text-sm">Paystack</p>
+                    <div className="pt-4 pb-4">
+                      <div className="mb-6 px-4 py-3 bg-[#2A2522] rounded-lg flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 rounded-full bg-[#09a4da]"></div>
+                          <p className="text-white text-sm">Paystack</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Image src={MasterCard} alt="Mastercard" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={Visa} alt="Visa" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={MTNMomo} alt="MTN Mobile Money" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={AirtelTigo} alt="AirtelTigo Money" width={40} height={20} style={{ objectFit: 'contain' }} />
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Image src={MasterCard} alt="Mastercard" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={Visa} alt="Visa" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={MTNMomo} alt="MTN Mobile Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                        <Image src={AirtelTigo} alt="AirtelTigo Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                      <button
+                        type="button"
+                        onClick={handleContinue}
+                        className="h-[50px] md:h-[45px] w-full bg-white text-center text-sm md:text-base rounded-lg font-medium hover:bg-stone-100 transition-colors"
+                      >
+                        Continue to Payment
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="max-w-2xl mx-auto">
+                  <h2 className="text-lg text-white mb-6">Contact</h2>
+                  <div className="flex flex-col gap-6">
+                    <div className="bg-stone-800/50 p-4 rounded-lg">
+                      <h3 className="text-white font-medium mb-3">Contact Information</h3>
+                      <div className="text-stone-300 text-sm">
+                        <p>{formData.firstName} {formData.lastName}</p>
+                        <p>{formData.email}</p>
+                        <p>{phoneNumber}</p>
                       </div>
                     </div>
-                    <button 
-                      type="button"
-                      onClick={handleBack}
-                      className="h-[50px] md:h-[45px] w-full bg-stone-700 text-white text-center text-sm md:text-base rounded-lg font-medium hover:bg-stone-600 transition-colors"
-                    >
-                      Back to Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
 
-        {/* Show order summary only on desktop */}
-        <div className="hidden md:block md:w-2/5 p-4 overflow-y-auto">
-          <h2 className="text-lg text-white mb-4">Order Summary</h2>
-          <div className="w-full flex flex-col">
-            <div className="w-full flex flex-col gap-4 mb-6">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-4 p-3 bg-stone-800/50 rounded-lg">
-                  <div className="w-[80px] h-[80px] rounded-lg overflow-hidden flex-shrink-0">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h1 className="text-sm font-medium text-white mb-2">
-                      {item.title}
-                    </h1>
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xs text-stone-400">Price</h4>
-                        <h4 className="text-xs font-medium text-white">
-                          {isLocationLoading ? 'Loading...' : getPriceDisplay(item)}
-                        </h4>
+                    <div className="bg-stone-800/50 p-4 rounded-lg">
+                      <h3 className="text-white font-medium mb-3">
+                        {deliveryMethod === 'ship' ? 'Shipping Address' : 'Pickup Location'}
+                      </h3>
+                      <div className="text-stone-300 text-sm">
+                        {deliveryMethod === 'ship' ? (
+                          <>
+                            <p>{formData.address}</p>
+                            <p>{formData.city}, {formData.state} {formData.postalCode}</p>
+                            {formData.landmark && <p>Landmark: {formData.landmark}</p>}
+                          </>
+                        ) : (
+                          <>
+                            {storeLocations.find(loc => loc.id === formData.pickupLocation) && (
+                              <>
+                                <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).name}</p>
+                                <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).address}</p>
+                                <p>{storeLocations.find(loc => loc.id === formData.pickupLocation).phone}</p>
+                              </>
+                            )}
+                          </>
+                        )}
                       </div>
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xs text-stone-400">Quantity</h4>
-                        <h4 className="text-xs font-medium text-white">
-                          {item.quantity}
-                        </h4>
+                    </div>
+
+                    <div className="pt-4 pb-4">
+                      <div className="mb-6 px-4 py-3 bg-[#2A2522] rounded-lg flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 rounded-full bg-[#09a4da]"></div>
+                          <p className="text-white text-sm">Paystack</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Image src={MasterCard} alt="Mastercard" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                          <Image src={Visa} alt="Visa" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                          <Image src={MTNMomo} alt="MTN Mobile Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                          <Image src={AirtelTigo} alt="AirtelTigo Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between pt-1 border-t border-stone-700">
-                        <h4 className="text-xs text-stone-400">Subtotal</h4>
-                        <h4 className="text-xs font-medium text-white">
-                          {isLocationLoading ? 'Loading...' : formatPrice(getItemPrice(item) * item.quantity)}
-                        </h4>
-                      </div>
+                      <button
+                        type="button"
+                        onClick={handleBack}
+                        className="h-[50px] md:h-[45px] w-full bg-stone-700 text-white text-center text-sm md:text-base rounded-lg font-medium hover:bg-stone-600 transition-colors"
+                      >
+                        Back to Details
+                      </button>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="w-full space-y-3">
-              <div className="w-full py-2 px-1 flex items-center justify-between">
-                <h3 className="text-sm text-stone-400">Subtotal</h3>
-                <h3 className="text-sm font-medium text-white">
-                  {isLocationLoading ? 'Loading...' : formatPrice(calculateSubtotal())}
-                </h3>
-              </div>
-              {userLocation?.pricing === 'ghana' ? (
-                <div className="w-full py-2 px-1 flex items-center justify-between">
-                  <h3 className="text-sm text-stone-400">Delivery Cost</h3>
-                  <h3 className="text-sm font-medium text-white">GHS 40.00</h3>
-                </div>
-              ) : (
-                <div className="w-full py-2 px-1 flex items-center justify-between">
-                  <h3 className="text-sm text-stone-400">Delivery Method</h3>
-                  <h3 className="text-sm font-medium text-white">
-                    {deliveryMethod === 'ship' ? 'Shipping' : 'Store Pickup'}
-                  </h3>
-                </div>
-              )}
-              <div className="w-full py-2 px-1 flex items-center justify-between border-t border-stone-700 pt-3">
-                <h3 className="text-base font-medium text-white">Total due</h3>
-                <h3 className="text-base font-medium text-white">
-                  {isLocationLoading ? 'Loading...' : formatPrice(calculateTotal())}
-                </h3>
-              </div>
-            </div>
-            <button 
-              className={`h-[45px] w-full text-center text-sm rounded-lg mt-6 font-medium ${
-                currentStep === 'summary' 
-                  ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer' 
-                  : 'bg-stone-700 text-stone-400 cursor-not-allowed'
-              }`}
-              disabled={currentStep !== 'summary' || isProcessing || !paystackInstance}
-              onClick={handlePayment}
-            >
-              {isProcessing ? 'Processing...' : 'Pay Now'}
-            </button>
+              </>
+            )}
           </div>
-        </div>
 
-        {/* Show order summary on mobile only when in summary step */}
-        {currentStep === 'summary' && (
-          <div className="md:hidden w-full p-3 md:p-4 overflow-y-auto">
+          {/* Show order summary only on desktop */}
+          <div className="hidden md:block md:w-2/5 p-4 overflow-y-auto">
             <h2 className="text-lg text-white mb-4">Order Summary</h2>
             <div className="w-full flex flex-col">
               <div className="w-full flex flex-col gap-4 mb-6">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex gap-3 md:gap-4 p-3 bg-stone-800/50 rounded-lg">
-                    <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-lg overflow-hidden flex-shrink-0">
+                  <div key={item.id} className="flex gap-4 p-3 bg-stone-800/50 rounded-lg">
+                    <div className="w-[80px] h-[80px] rounded-lg overflow-hidden flex-shrink-0">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -1293,8 +1195,8 @@ const CheckoutForm = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h1 className="text-sm font-medium text-white mb-2 line-clamp-2">
+                    <div className="flex-1">
+                      <h1 className="text-sm font-medium text-white mb-2">
                         {item.title}
                       </h1>
                       <div className="flex flex-col gap-1">
@@ -1328,19 +1230,19 @@ const CheckoutForm = () => {
                     {isLocationLoading ? 'Loading...' : formatPrice(calculateSubtotal())}
                   </h3>
                 </div>
-              {userLocation?.pricing === 'ghana' ? (
-                <div className="w-full py-2 px-1 flex items-center justify-between">
-                  <h3 className="text-sm text-stone-400">Delivery Cost</h3>
-                  <h3 className="text-sm font-medium text-white">GHS 40.00</h3>
-                </div>
-              ) : (
-                <div className="w-full py-2 px-1 flex items-center justify-between">
-                  <h3 className="text-sm text-stone-400">Delivery Method</h3>
-                  <h3 className="text-sm font-medium text-white">
-                    {deliveryMethod === 'ship' ? 'Shipping' : 'Store Pickup'}
-                  </h3>
-                </div>
-              )}
+                {userLocation?.pricing === 'ghana' ? (
+                  <div className="w-full py-2 px-1 flex items-center justify-between">
+                    <h3 className="text-sm text-stone-400">Delivery Cost</h3>
+                    <h3 className="text-sm font-medium text-white">GHS 40.00</h3>
+                  </div>
+                ) : (
+                  <div className="w-full py-2 px-1 flex items-center justify-between">
+                    <h3 className="text-sm text-stone-400">Delivery Method</h3>
+                    <h3 className="text-sm font-medium text-white">
+                      {deliveryMethod === 'ship' ? 'Shipping' : 'Store Pickup'}
+                    </h3>
+                  </div>
+                )}
                 <div className="w-full py-2 px-1 flex items-center justify-between border-t border-stone-700 pt-3">
                   <h3 className="text-base font-medium text-white">Total due</h3>
                   <h3 className="text-base font-medium text-white">
@@ -1348,12 +1250,11 @@ const CheckoutForm = () => {
                   </h3>
                 </div>
               </div>
-              <button 
-                className={`h-[50px] md:h-[45px] w-full text-center text-sm md:text-base rounded-lg mt-6 font-medium ${
-                  currentStep === 'summary' 
-                    ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer' 
+              <button
+                className={`h-[45px] w-full text-center text-sm rounded-lg mt-6 font-medium ${currentStep === 'summary'
+                    ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
                     : 'bg-stone-700 text-stone-400 cursor-not-allowed'
-                }`}
+                  }`}
                 disabled={currentStep !== 'summary' || isProcessing || !paystackInstance}
                 onClick={handlePayment}
               >
@@ -1361,9 +1262,94 @@ const CheckoutForm = () => {
               </button>
             </div>
           </div>
-        )}
-      </div>
-    </motion.div>
+
+          {/* Show order summary on mobile only when in summary step */}
+          {currentStep === 'summary' && (
+            <div className="md:hidden w-full p-3 md:p-4 overflow-y-auto">
+              <h2 className="text-lg text-white mb-4">Order Summary</h2>
+              <div className="w-full flex flex-col">
+                <div className="w-full flex flex-col gap-4 mb-6">
+                  {cartItems.map((item) => (
+                    <div key={item.id} className="flex gap-3 md:gap-4 p-3 bg-stone-800/50 rounded-lg">
+                      <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          width={500}
+                          height={500}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h1 className="text-sm font-medium text-white mb-2 line-clamp-2">
+                          {item.title}
+                        </h1>
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-xs text-stone-400">Price</h4>
+                            <h4 className="text-xs font-medium text-white">
+                              {isLocationLoading ? 'Loading...' : getPriceDisplay(item)}
+                            </h4>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-xs text-stone-400">Quantity</h4>
+                            <h4 className="text-xs font-medium text-white">
+                              {item.quantity}
+                            </h4>
+                          </div>
+                          <div className="flex items-center justify-between pt-1 border-t border-stone-700">
+                            <h4 className="text-xs text-stone-400">Subtotal</h4>
+                            <h4 className="text-xs font-medium text-white">
+                              {isLocationLoading ? 'Loading...' : formatPrice(getItemPrice(item) * item.quantity)}
+                            </h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="w-full space-y-3">
+                  <div className="w-full py-2 px-1 flex items-center justify-between">
+                    <h3 className="text-sm text-stone-400">Subtotal</h3>
+                    <h3 className="text-sm font-medium text-white">
+                      {isLocationLoading ? 'Loading...' : formatPrice(calculateSubtotal())}
+                    </h3>
+                  </div>
+                  {userLocation?.pricing === 'ghana' ? (
+                    <div className="w-full py-2 px-1 flex items-center justify-between">
+                      <h3 className="text-sm text-stone-400">Delivery Cost</h3>
+                      <h3 className="text-sm font-medium text-white">GHS 40.00</h3>
+                    </div>
+                  ) : (
+                    <div className="w-full py-2 px-1 flex items-center justify-between">
+                      <h3 className="text-sm text-stone-400">Delivery Method</h3>
+                      <h3 className="text-sm font-medium text-white">
+                        {deliveryMethod === 'ship' ? 'Shipping' : 'Store Pickup'}
+                      </h3>
+                    </div>
+                  )}
+                  <div className="w-full py-2 px-1 flex items-center justify-between border-t border-stone-700 pt-3">
+                    <h3 className="text-base font-medium text-white">Total due</h3>
+                    <h3 className="text-base font-medium text-white">
+                      {isLocationLoading ? 'Loading...' : formatPrice(calculateTotal())}
+                    </h3>
+                  </div>
+                </div>
+                <button
+                  className={`h-[50px] md:h-[45px] w-full text-center text-sm md:text-base rounded-lg mt-6 font-medium ${currentStep === 'summary'
+                      ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
+                      : 'bg-stone-700 text-stone-400 cursor-not-allowed'
+                    }`}
+                  disabled={currentStep !== 'summary' || isProcessing || !paystackInstance}
+                  onClick={handlePayment}
+                >
+                  {isProcessing ? 'Processing...' : 'Pay Now'}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </motion.div>
     </>
   );
 };

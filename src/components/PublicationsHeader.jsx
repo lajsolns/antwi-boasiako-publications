@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FiShoppingBag, FiMenu, FiX, FiSearch } from 'react-icons/fi';
 import { useCart } from '@/context/CartContext';
+import PublicationsCartSidebar from './PublicationsCartSidebar';
 
 // Publications-specific cart button
 const PublicationsCartButton = () => {
@@ -50,6 +51,7 @@ export default function PublicationsHeader({
 
   return (
     <>
+      <PublicationsCartSidebar />
       {/* Quote Banner */}
       <div className="bg-gray-900 text-white py-2 relative z-40">
         <div className="max-w-6xl mx-auto flex items-center justify-between w-full h-full px-2">
