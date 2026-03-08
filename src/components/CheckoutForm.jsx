@@ -918,8 +918,8 @@ const CheckoutForm = () => {
                               setFormData(prev => ({ ...prev, pickupLocation: '' }));
                             }}
                             className={`flex items-center justify-center gap-2 px-6 py-4 md:py-3 rounded-lg transition-colors text-sm md:text-base w-full ${deliveryMethod === 'ship'
-                                ? 'bg-white text-[#1C1917]'
-                                : 'bg-[#1C1917] text-white border border-stone-600'
+                              ? 'bg-white text-[#1C1917]'
+                              : 'bg-[#1C1917] text-white border border-stone-600'
                               }`}
                           >
                             <FaTruck />
@@ -1072,8 +1072,8 @@ const CheckoutForm = () => {
                             <div
                               key={location.id}
                               className={`p-4 rounded-lg border cursor-pointer transition-colors ${formData.pickupLocation === location.id
-                                  ? 'border-white bg-white/10'
-                                  : 'border-stone-600 hover:border-white'
+                                ? 'border-white bg-white/10'
+                                : 'border-stone-600 hover:border-white'
                                 }`}
                               onClick={() => setFormData(prev => ({ ...prev, pickupLocation: location.id }))}
                             >
@@ -1159,10 +1159,10 @@ const CheckoutForm = () => {
                           <p className="text-white text-sm">Paystack</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Image src={MasterCard} alt="Mastercard" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                          <Image src={Visa} alt="Visa" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                          <Image src={MTNMomo} alt="MTN Mobile Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
-                          <Image src={AirtelTigo} alt="AirtelTigo Money" height={20} style={{ objectFit: 'contain', width: 'auto' }} />
+                          <Image src={MasterCard} alt="Mastercard" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={Visa} alt="Visa" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={MTNMomo} alt="MTN Mobile Money" width={32} height={20} style={{ objectFit: 'contain' }} />
+                          <Image src={AirtelTigo} alt="AirtelTigo Money" width={40} height={20} style={{ objectFit: 'contain' }} />
                         </div>
                       </div>
                       <button
@@ -1252,8 +1252,8 @@ const CheckoutForm = () => {
               </div>
               <button
                 className={`h-[45px] w-full text-center text-sm rounded-lg mt-6 font-medium ${currentStep === 'summary'
-                    ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
-                    : 'bg-stone-700 text-stone-400 cursor-not-allowed'
+                  ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
+                  : 'bg-stone-700 text-stone-400 cursor-not-allowed'
                   }`}
                 disabled={currentStep !== 'summary' || isProcessing || !paystackInstance}
                 onClick={handlePayment}
@@ -1337,8 +1337,8 @@ const CheckoutForm = () => {
                 </div>
                 <button
                   className={`h-[50px] md:h-[45px] w-full text-center text-sm md:text-base rounded-lg mt-6 font-medium ${currentStep === 'summary'
-                      ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
-                      : 'bg-stone-700 text-stone-400 cursor-not-allowed'
+                    ? 'bg-white hover:bg-stone-100 transition-colors cursor-pointer'
+                    : 'bg-stone-700 text-stone-400 cursor-not-allowed'
                     }`}
                   disabled={currentStep !== 'summary' || isProcessing || !paystackInstance}
                   onClick={handlePayment}
