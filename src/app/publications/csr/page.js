@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiPlay, FiImage, FiFileText, FiArrowRight, FiHeart } from 'react-icons/fi';
+import { useLanguage } from '@/context/LanguageContext';
 import PublicationsHeader from '@/components/PublicationsHeader';
 import PublicationsFooter from '@/components/PublicationsFooter';
 
@@ -96,6 +97,7 @@ export default function CSRPage() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const { t } = useLanguage();
 
     const categories = ['All', ...new Set(csrActivities.map(a => a.category))];
     const filtered = selectedCategory === 'All' ? csrActivities : csrActivities.filter(a => a.category === selectedCategory);
@@ -128,23 +130,22 @@ export default function CSRPage() {
                 <section className="relative pt-48 pb-32 px-8 overflow-hidden bg-[#FAF9F6]">
                     <div className="absolute inset-0 bg-[url('/image/press/chronicling_ghana.jpeg')] bg-cover bg-center opacity-[0.07]" />
                     <div className="max-w-4xl mx-auto text-center relative z-10">
-                        <span className="font-inter text-xs tracking-[0.3em] text-amber-800 uppercase mb-6 block">Community Impact</span>
+                        <span className="font-inter text-xs tracking-[0.3em] text-amber-800 uppercase mb-6 block">{t('csr.superheading')}</span>
                         <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 leading-tight mb-6">
-                            Corporate Social<br />
-                            <span className="italic font-light">Responsibility</span>
+                            {t('csr.title')}<br />
+                            <span className="italic font-light">{t('csr.titleItalic')}</span>
                         </h1>
                         <div className="w-16 h-[1px] bg-amber-800 mx-auto my-8" />
                         <p className="font-inter text-lg text-gray-500 font-light leading-relaxed max-w-2xl mx-auto">
-                            Beyond publications, Dr. Antwi-Boasiako is committed to creating lasting,
-                            meaningful impact across communities through education, inclusion, and empowerment.
+                            {t('csr.description')}
                         </p>
 
                         {/* Impact Stats */}
                         <div className="grid grid-cols-3 gap-8 mt-16 max-w-xl mx-auto">
                             {[
-                                { value: '4,300+', label: 'Lives Touched' },
-                                { value: '6', label: 'Active Programmes' },
-                                { value: '15+', label: 'Communities' },
+                                { value: '4,300+', label: t('csr.livesTouched') },
+                                { value: '6', label: t('csr.activeProgrammes') },
+                                { value: '15+', label: t('csr.communities') },
                             ].map((stat) => (
                                 <div key={stat.label} className="text-center">
                                     <div className="font-playfair text-3xl text-gray-900 mb-1">{stat.value}</div>
@@ -159,8 +160,8 @@ export default function CSRPage() {
                 <section className="py-24 px-8 bg-white border-t border-gray-100">
                     <div className="max-w-6xl mx-auto">
                         <div className="mb-12">
-                            <span className="font-inter text-xs tracking-[0.2em] text-gray-400 uppercase">Spotlight</span>
-                            <h2 className="font-playfair text-3xl text-gray-900 mt-2">Featured Initiatives</h2>
+                            <span className="font-inter text-xs tracking-[0.2em] text-gray-400 uppercase">{t('csr.spotlight')}</span>
+                            <h2 className="font-playfair text-3xl text-gray-900 mt-2">{t('csr.featuredInitiatives')}</h2>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -190,7 +191,7 @@ export default function CSRPage() {
                                                 <span className="font-inter text-xs text-amber-800 font-medium">{activity.impact}</span>
                                             </div>
                                             <span className="font-inter text-[10px] tracking-widest uppercase text-gray-400 group-hover:text-amber-800 transition-colors flex items-center gap-1">
-                                                Read More <FiArrowRight className="w-3 h-3" />
+                                                {t('common.readMore')} <FiArrowRight className="w-3 h-3" />
                                             </span>
                                         </div>
                                     </div>
@@ -205,8 +206,8 @@ export default function CSRPage() {
                     <div className="max-w-6xl mx-auto">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-6">
                             <div>
-                                <span className="font-inter text-xs tracking-[0.2em] text-gray-400 uppercase">Our Work</span>
-                                <h2 className="font-playfair text-3xl text-gray-900 mt-2">All Initiatives</h2>
+                                <span className="font-inter text-xs tracking-[0.2em] text-gray-400 uppercase">{t('csr.ourWork')}</span>
+                                <h2 className="font-playfair text-3xl text-gray-900 mt-2">{t('csr.allInitiatives')}</h2>
                             </div>
                             {/* Category Filter */}
                             <div className="flex flex-wrap gap-2">
@@ -215,8 +216,8 @@ export default function CSRPage() {
                                         key={cat}
                                         onClick={() => setSelectedCategory(cat)}
                                         className={`font-inter text-[10px] tracking-widest uppercase px-4 py-2 border transition-all duration-200 ${selectedCategory === cat
-                                                ? 'bg-gray-900 text-white border-gray-900'
-                                                : 'bg-white text-gray-500 border-gray-200 hover:border-gray-900 hover:text-gray-900'
+                                            ? 'bg-gray-900 text-white border-gray-900'
+                                            : 'bg-white text-gray-500 border-gray-200 hover:border-gray-900 hover:text-gray-900'
                                             }`}
                                     >
                                         {cat}
@@ -264,7 +265,7 @@ export default function CSRPage() {
                                                 <span className="font-inter text-[10px] text-amber-800">{activity.impact}</span>
                                             </div>
                                             <span className="font-inter text-[10px] tracking-widest uppercase text-gray-400 group-hover:text-amber-800 transition-colors flex items-center gap-1">
-                                                Details <FiArrowRight className="w-3 h-3" />
+                                                {t('common.viewDetails')} <FiArrowRight className="w-3 h-3" />
                                             </span>
                                         </div>
                                     </div>
@@ -277,18 +278,17 @@ export default function CSRPage() {
                 {/* CTA */}
                 <section className="py-24 px-8 bg-gray-900 text-white text-center">
                     <div className="max-w-2xl mx-auto">
-                        <span className="font-inter text-xs tracking-[0.3em] text-amber-400 uppercase mb-4 block">Get Involved</span>
-                        <h2 className="font-playfair text-4xl font-normal mb-6">Partner With Us</h2>
+                        <span className="font-inter text-xs tracking-[0.3em] text-amber-400 uppercase mb-4 block">{t('csr.getInvolved')}</span>
+                        <h2 className="font-playfair text-4xl font-normal mb-6">{t('csr.partnerWithUs')}</h2>
                         <div className="w-12 h-[1px] bg-amber-800 mx-auto mb-8" />
                         <p className="font-inter text-gray-400 font-light leading-relaxed mb-10">
-                            Join Dr. Antwi-Boasiako in creating meaningful impact across Africa.
-                            We welcome partnerships, sponsorships, and volunteer contributions.
+                            {t('csr.partnerDescription')}
                         </p>
                         <Link
                             href="/publications/contact"
                             className="inline-block px-10 py-4 border border-white text-white font-inter text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 transition-all duration-300"
                         >
-                            Get in Touch
+                            {t('csr.getInTouch')}
                         </Link>
                     </div>
                 </section>

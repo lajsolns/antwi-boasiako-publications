@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 import { FiX, FiMinus, FiPlus, FiTrash2, FiShoppingBag } from 'react-icons/fi';
 import Link from 'next/link';
@@ -21,6 +22,7 @@ const PublicationsCartSidebar = () => {
         clearCart
     } = useCart();
     const router = useRouter();
+    const { t } = useLanguage();
 
     const handleCheckout = () => {
         setIsCartOpen(false);
@@ -60,9 +62,9 @@ const PublicationsCartSidebar = () => {
                             {/* Header */}
                             <div className="flex items-center justify-between p-6 border-b border-gray-100 relative z-10">
                                 <div>
-                                    <h2 className="font-playfair text-2xl text-gray-900">Your Selection</h2>
+                                    <h2 className="font-playfair text-2xl text-gray-900">{t('cart.title')}</h2>
                                     <p className="font-inter text-[10px] tracking-[0.2em] uppercase text-amber-800 mt-1">
-                                        {cartItems.length} {cartItems.length === 1 ? 'Item' : 'Items'} in Cart
+                                        {cartItems.length} {cartItems.length === 1 ? t('cart.itemCount_one', { count: cartItems.length }) : t('cart.itemCount_other', { count: cartItems.length })}
                                     </p>
                                 </div>
                                 <button
@@ -80,15 +82,15 @@ const PublicationsCartSidebar = () => {
                                         <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-6">
                                             <FiShoppingBag className="w-6 h-6 text-gray-300" />
                                         </div>
-                                        <h3 className="font-playfair text-xl text-gray-900 mb-2">The cart is empty</h3>
+                                        <h3 className="font-playfair text-xl text-gray-900 mb-2">{t('cart.empty')}</h3>
                                         <p className="font-inter text-sm text-gray-500 font-light mb-8 max-w-[240px]">
-                                            Your curated collection of intellectual works will appear here once selected.
+                                            {t('cart.emptyMessage')}
                                         </p>
                                         <button
                                             onClick={() => { setIsCartOpen(false); router.push('/publications/all-books'); }}
                                             className="px-8 py-3 bg-gray-900 text-white hover:bg-amber-900 transition-all duration-300 font-inter text-xs tracking-[0.2em] uppercase"
                                         >
-                                            Continue Exploring
+                                            {t('cart.continueExploring')}
                                         </button>
                                     </div>
                                 ) : (
@@ -160,7 +162,7 @@ const PublicationsCartSidebar = () => {
                             {cartItems.length > 0 && (
                                 <div className="border-t border-gray-100 p-8 space-y-6 bg-gray-50/50 relative z-10">
                                     <div className="flex justify-between items-baseline">
-                                        <span className="font-inter text-[10px] tracking-[0.2em] uppercase text-gray-400">Subtotal</span>
+                                        <span className="font-inter text-[10px] tracking-[0.2em] uppercase text-gray-400">{t('cart.subtotal')}</span>
                                         <span className="font-playfair text-2xl text-gray-900">
                                             {isLocationLoading ? '...' : getTotalDisplay()}
                                         </span>
@@ -171,25 +173,25 @@ const PublicationsCartSidebar = () => {
                                             className="w-full py-4 bg-gray-900 text-white hover:bg-amber-900 transition-all duration-300 font-inter text-xs tracking-[0.2em] uppercase shadow-lg shadow-gray-200"
                                             onClick={handleCheckout}
                                         >
-                                            Proceed to Checkout
+                                            {t('cart.checkout')}
                                         </button>
                                         <button
                                             className="w-full py-4 border border-gray-200 text-gray-600 hover:border-amber-800 hover:text-amber-800 transition-all duration-300 font-inter text-xs tracking-[0.2em] uppercase bg-white"
                                             onClick={handleGoToCart}
                                         >
-                                            View Full Cart
+                                            {t('cart.viewFullCart')}
                                         </button>
                                         <button
                                             className="w-full py-2 text-gray-400 hover:text-gray-600 transition-colors font-inter text-[10px] tracking-widest uppercase"
                                             onClick={clearCart}
                                         >
-                                            Clear Selection
+                                            {t('cart.clearSelection')}
                                         </button>
                                     </div>
 
                                     <p className="text-[9px] text-gray-400 text-center font-inter tracking-wider leading-relaxed">
-                                        Shipping & taxes calculated at the next step.<br />
-                                        Complimentary archival handling included.
+                                        {t('cart.shippingNote')}<br />
+                                        {t('cart.archivalNote')}
                                     </p>
                                 </div>
                             )}

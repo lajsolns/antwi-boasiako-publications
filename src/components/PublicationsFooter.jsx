@@ -1,7 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function PublicationsFooter() {
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { label: t('nav.home'), href: '/publications' },
+    { label: t('nav.allBooks'), href: '/publications/all-books' },
+    { label: t('nav.events'), href: '/publications/events' },
+    { label: t('nav.gallery'), href: '/publications/gallery' },
+    { label: t('footer.aboutAuthor'), href: '/publications/author' },
+    { label: t('nav.contact'), href: '/publications/contact' },
+  ];
+
+  const moreLinks = [
+    { label: t('nav.about'), href: '/publications/about' },
+    { label: t('nav.csr'), href: '/publications/csr' },
+    { label: t('footer.privacyPolicy'), href: '/publications/privacy-policy' },
+    { label: 'Shipping Policy', href: '/publications/shipping-policy' },
+    { label: t('footer.cartLink'), href: '/publications/cart' },
+  ];
+
   return (
     <footer className="bg-[#111111] text-white py-24 px-8 border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
@@ -40,21 +62,14 @@ export default function PublicationsFooter() {
           {/* Navigate */}
           <div>
             <h3 className="font-playfair text-2xl font-normal text-gray-100 mb-6 relative inline-block">
-              Navigate
+              {t('footer.navigate')}
               <span className="absolute -bottom-2 left-0 w-8 h-[1px] bg-gray-700"></span>
             </h3>
             <ul className="space-y-2">
-              {[
-                { name: 'Home', href: '/publications' },
-                { name: 'All Books', href: '/publications/all-books' },
-                { name: 'Events', href: '/publications/events' },
-                { name: 'Gallery', href: '/publications/gallery' },
-                { name: 'About the Author', href: '/publications/author' },
-                { name: 'Contact Us', href: '/publications/contact' },
-              ].map(link => (
-                <li key={link.name}>
+              {navLinks.map(link => (
+                <li key={link.href}>
                   <Link href={link.href} className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -64,20 +79,14 @@ export default function PublicationsFooter() {
           {/* More */}
           <div>
             <h3 className="font-playfair text-2xl font-normal text-gray-100 mb-6 relative inline-block">
-              More
+              {t('footer.more')}
               <span className="absolute -bottom-2 left-0 w-8 h-[1px] bg-gray-700"></span>
             </h3>
             <ul className="space-y-2">
-              {[
-                { name: 'About', href: '/publications/about' },
-                { name: 'CSR', href: '/publications/csr' },
-                { name: 'Privacy Policy', href: '/publications/privacy-policy' },
-                { name: 'Shipping Policy', href: '/publications/shipping-policy' },
-                { name: 'Cart', href: '/publications/cart' },
-              ].map(link => (
-                <li key={link.name}>
+              {moreLinks.map(link => (
+                <li key={link.href}>
                   <Link href={link.href} className="font-inter text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -87,20 +96,20 @@ export default function PublicationsFooter() {
           {/* Newsletter */}
           <div>
             <h3 className="font-playfair text-2xl font-normal text-gray-100 mb-6 relative inline-block">
-              Stay Connected
+              {t('footer.stayConnected')}
               <span className="absolute -bottom-2 left-0 w-8 h-[1px] bg-gray-700"></span>
             </h3>
             <p className="font-inter text-gray-400 text-sm mb-6 leading-relaxed font-light">
-              Subscribe for updates on cybersecurity insights, new publications, and professional developments.
+              {t('footer.newsletterText')}
             </p>
             <div className="space-y-4">
               <input
                 type="email"
-                placeholder="Enter your email address"
+                placeholder={t('footer.emailPlaceholder')}
                 className="w-full px-4 py-3 bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-inter text-sm transition-colors"
               />
               <button className="w-full px-4 py-3 bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-400 transition-all duration-300 font-inter text-xs tracking-[0.2em] font-medium uppercase group">
-                Subscribe <span className="inline-block ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                {t('footer.subscribe')} <span className="inline-block ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
               </button>
             </div>
           </div>
@@ -111,22 +120,22 @@ export default function PublicationsFooter() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className="font-inter text-gray-400 text-sm">
-                © 2026 Antwi-Boasiako Publications. All rights reserved.
+                {t('footer.copyright')}
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/publications/privacy-policy" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+                {t('footer.privacyPolicy')}
+              </Link>
               <a href="#" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                Privacy Policy
+                {t('footer.termsOfService')}
               </a>
               <a href="#" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                Terms of Service
+                {t('footer.cookiePolicy')}
               </a>
-              <a href="#" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                Cookie Policy
-              </a>
-              <a href="#" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-                Contact
-              </a>
+              <Link href="/publications/contact" className="font-inter text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+                {t('footer.contact')}
+              </Link>
             </div>
           </div>
         </div>

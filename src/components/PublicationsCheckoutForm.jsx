@@ -6,6 +6,7 @@ import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { useRouter } from 'next/navigation';
 import { FiTruck, FiMapPin, FiInfo, FiGlobe, FiChevronLeft, FiCheckCircle, FiLock } from "react-icons/fi";
 import { setManualLocation } from '@/services/locationService';
@@ -42,6 +43,8 @@ const PublicationsCheckoutForm = () => {
         getPriceDisplay,
         getTotalDisplay
     } = useCart();
+
+    const { t } = useLanguage();
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [currentStep, setCurrentStep] = useState('details'); // 'details' or 'summary'
@@ -184,9 +187,9 @@ const PublicationsCheckoutForm = () => {
                     {/* Left Column: Form */}
                     <div className="space-y-12">
                         <div>
-                            <h1 className="font-playfair text-4xl text-gray-900 mb-2">Checkout</h1>
+                            <h1 className="font-playfair text-4xl text-gray-900 mb-2">{t('checkout.title')}</h1>
                             <p className="font-inter text-xs tracking-[0.2em] uppercase text-amber-800">
-                                Archival Delivery Information
+                                {t('checkout.subtitle')}
                             </p>
                         </div>
 
@@ -195,16 +198,16 @@ const PublicationsCheckoutForm = () => {
 
                                 {/* Pricing Region Selector */}
                                 <section className="space-y-2">
-                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Pricing Region</h2>
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">{t('checkout.pricingRegion')}</h2>
                                     <div className="location-dropdown-pub relative flex items-center justify-between p-5 border border-gray-100 bg-gray-50/40">
                                         <div className="flex items-center gap-3">
                                             <FiGlobe className="text-amber-800 w-4 h-4 flex-shrink-0" />
                                             <div>
                                                 <p className="font-inter text-xs text-gray-900 font-medium">
-                                                    {isLocationLoading ? 'Detecting location...' : getLocationDisplay()}
+                                                    {isLocationLoading ? t('checkout.detectingLocation') : getLocationDisplay()}
                                                 </p>
                                                 <p className="font-inter text-[10px] text-gray-400 mt-0.5 tracking-wider">
-                                                    Select your region to see the correct pricing
+                                                    {t('checkout.pricingHelper')}
                                                 </p>
                                             </div>
                                         </div>
@@ -213,7 +216,7 @@ const PublicationsCheckoutForm = () => {
                                             onClick={() => setShowLocationDropdown(!showLocationDropdown)}
                                             className="font-inter text-[10px] tracking-widest uppercase text-amber-800 border border-amber-800/30 px-4 py-2 hover:bg-amber-50 transition-colors duration-200 flex-shrink-0"
                                         >
-                                            Change
+                                            {t('checkout.changeRegion')}
                                         </button>
 
                                         {showLocationDropdown && (
@@ -221,28 +224,18 @@ const PublicationsCheckoutForm = () => {
                                                 <div className="p-2 space-y-1">
                                                     <button
                                                         type="button"
-                                                        onClick={() => handleLocationChange({
-                                                            country: 'Ghana',
-                                                            countryCode: 'GH',
-                                                            region: 'ghana',
-                                                            pricing: 'ghana'
-                                                        })}
+                                                        onClick={() => handleLocationChange({ country: 'Ghana', countryCode: 'GH', region: 'ghana', pricing: 'ghana' })}
                                                         className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors text-left group"
                                                     >
-                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">Ghana</span>
+                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">{t('checkout.ghana')}</span>
                                                         <span className="font-inter text-xs text-gray-400">GHS</span>
                                                     </button>
                                                     <button
                                                         type="button"
-                                                        onClick={() => handleLocationChange({
-                                                            country: 'International',
-                                                            countryCode: null,
-                                                            region: 'international',
-                                                            pricing: 'international'
-                                                        })}
+                                                        onClick={() => handleLocationChange({ country: 'International', countryCode: null, region: 'international', pricing: 'international' })}
                                                         className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors text-left group"
                                                     >
-                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">International</span>
+                                                        <span className="font-inter text-sm text-gray-700 group-hover:text-amber-800">{t('checkout.international')}</span>
                                                         <span className="font-inter text-xs text-gray-400">$</span>
                                                     </button>
                                                 </div>
@@ -253,42 +246,30 @@ const PublicationsCheckoutForm = () => {
 
                                 {/* Contact Section */}
                                 <section className="space-y-6">
-                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Contact Details</h2>
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">{t('checkout.contactDetails')}</h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
-                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">First Name</label>
-                                            <input
-                                                type="text"
-                                                name="firstName"
-                                                value={formData.firstName}
-                                                onChange={handleInputChange}
+                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.firstName')}</label>
+                                            <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange}
                                                 className={`w-full p-4 border ${formErrors.firstName ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
                                                 placeholder="Dr."
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Last Name</label>
-                                            <input
-                                                type="text"
-                                                name="lastName"
-                                                value={formData.lastName}
-                                                onChange={handleInputChange}
+                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.lastName')}</label>
+                                            <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
                                                 className={`w-full p-4 border ${formErrors.lastName ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
                                             />
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Email Address</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleInputChange}
+                                        <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.email')}</label>
+                                        <input type="email" name="email" value={formData.email} onChange={handleInputChange}
                                             className={`w-full p-4 border ${formErrors.email ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
                                         />
                                     </div>
                                     <div className="space-y-2 checkout-form">
-                                        <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Phone Number</label>
+                                        <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.phone')}</label>
                                         <PhoneInput
                                             country={'gh'}
                                             value={phoneNumber}
@@ -302,25 +283,21 @@ const PublicationsCheckoutForm = () => {
 
                                 {/* Delivery Method */}
                                 <section className="space-y-6">
-                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Delivery Method</h2>
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">{t('checkout.deliveryMethod')}</h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <button
-                                            onClick={() => setDeliveryMethod('ship')}
-                                            className={`flex items-center justify-between p-6 border transition-all ${deliveryMethod === 'ship' ? 'border-amber-800 bg-amber-50/10' : 'border-gray-100 bg-gray-50/30'}`}
-                                        >
+                                        <button onClick={() => setDeliveryMethod('ship')}
+                                            className={`flex items-center justify-between p-6 border transition-all ${deliveryMethod === 'ship' ? 'border-amber-800 bg-amber-50/10' : 'border-gray-100 bg-gray-50/30'}`}>
                                             <div className="flex items-center gap-4">
                                                 <FiTruck className={`${deliveryMethod === 'ship' ? 'text-amber-800' : 'text-gray-400'}`} />
-                                                <span className="font-inter text-sm text-gray-700">Shipping</span>
+                                                <span className="font-inter text-sm text-gray-700">{t('checkout.shipping')}</span>
                                             </div>
                                             {deliveryMethod === 'ship' && <FiCheckCircle className="text-amber-800 w-4 h-4" />}
                                         </button>
-                                        <button
-                                            onClick={() => setDeliveryMethod('pickup')}
-                                            className={`flex items-center justify-between p-6 border transition-all ${deliveryMethod === 'pickup' ? 'border-amber-800 bg-amber-50/10' : 'border-gray-100 bg-gray-50/30'}`}
-                                        >
+                                        <button onClick={() => setDeliveryMethod('pickup')}
+                                            className={`flex items-center justify-between p-6 border transition-all ${deliveryMethod === 'pickup' ? 'border-amber-800 bg-amber-50/10' : 'border-gray-100 bg-gray-50/30'}`}>
                                             <div className="flex items-center gap-4">
                                                 <FiMapPin className={`${deliveryMethod === 'pickup' ? 'text-amber-800' : 'text-gray-400'}`} />
-                                                <span className="font-inter text-sm text-gray-700">Self Collection</span>
+                                                <span className="font-inter text-sm text-gray-700">{t('checkout.selfCollection')}</span>
                                             </div>
                                             {deliveryMethod === 'pickup' && <FiCheckCircle className="text-amber-800 w-4 h-4" />}
                                         </button>
@@ -329,74 +306,47 @@ const PublicationsCheckoutForm = () => {
                                     {deliveryMethod === 'ship' ? (
                                         <div className="space-y-4 animate-in slide-in-from-top-2 duration-500">
                                             <div className="space-y-2">
-                                                <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Delivery Address</label>
-                                                <textarea
-                                                    name="address"
-                                                    value={formData.address}
-                                                    onChange={handleInputChange}
+                                                <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.deliveryAddress')}</label>
+                                                <textarea name="address" value={formData.address} onChange={handleInputChange}
                                                     className={`w-full p-4 border ${formErrors.address ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light h-24`}
-                                                    placeholder="House No, Street Name, etc."
+                                                    placeholder={t('checkout.deliveryAddressPlaceholder')}
                                                 />
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">City</label>
-                                                    <input
-                                                        type="text"
-                                                        name="city"
-                                                        value={formData.city}
-                                                        onChange={handleInputChange}
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.city')}</label>
+                                                    <input type="text" name="city" value={formData.city} onChange={handleInputChange}
                                                         className={`w-full p-4 border ${formErrors.city ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
-                                                        placeholder="Accra"
-                                                    />
+                                                        placeholder="Accra" />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">State / Region</label>
-                                                    <input
-                                                        type="text"
-                                                        name="state"
-                                                        value={formData.state}
-                                                        onChange={handleInputChange}
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.state')}</label>
+                                                    <input type="text" name="state" value={formData.state} onChange={handleInputChange}
                                                         className={`w-full p-4 border ${formErrors.state ? 'border-red-300' : 'border-gray-100'} bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light`}
-                                                        placeholder="Greater Accra"
-                                                    />
+                                                        placeholder="Greater Accra" />
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Postal Code</label>
-                                                    <input
-                                                        type="text"
-                                                        name="postalCode"
-                                                        value={formData.postalCode}
-                                                        onChange={handleInputChange}
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.postalCode')}</label>
+                                                    <input type="text" name="postalCode" value={formData.postalCode} onChange={handleInputChange}
                                                         className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light"
-                                                        placeholder="GA-000-0000"
-                                                    />
+                                                        placeholder="GA-000-0000" />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Famous Landmark <span className="normal-case text-gray-300">(Optional)</span></label>
-                                                    <input
-                                                        type="text"
-                                                        name="landmark"
-                                                        value={formData.landmark}
-                                                        onChange={handleInputChange}
+                                                    <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.landmark')} <span className="normal-case text-gray-300">{t('checkout.landmarkOptional')}</span></label>
+                                                    <input type="text" name="landmark" value={formData.landmark} onChange={handleInputChange}
                                                         className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light"
-                                                        placeholder="Near Accra Mall"
-                                                    />
+                                                        placeholder="Near Accra Mall" />
                                                 </div>
                                             </div>
                                         </div>
                                     ) : (
                                         <div className="space-y-4 animate-in slide-in-from-top-2 duration-500">
-                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">Select Collection Point</label>
-                                            <select
-                                                name="pickupLocation"
-                                                value={formData.pickupLocation}
-                                                onChange={handleInputChange}
-                                                className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light appearance-none"
-                                            >
-                                                <option value="">Choose a location...</option>
+                                            <label className="font-inter text-[10px] tracking-widest uppercase text-gray-400">{t('checkout.selectCollection')}</label>
+                                            <select name="pickupLocation" value={formData.pickupLocation} onChange={handleInputChange}
+                                                className="w-full p-4 border border-gray-100 bg-gray-50/50 focus:bg-white focus:border-amber-800 transition-all outline-none font-inter text-sm font-light appearance-none">
+                                                <option value="">{t('checkout.chooseLocation')}</option>
                                                 {storeLocations.map(loc => (
                                                     <option key={loc.id} value={loc.id}>{loc.name} — {loc.address}</option>
                                                 ))}
@@ -409,38 +359,36 @@ const PublicationsCheckoutForm = () => {
                                     onClick={() => validateForm() && setCurrentStep('summary')}
                                     className="w-full py-5 bg-gray-900 text-white hover:bg-amber-900 transition-all duration-500 font-inter text-xs tracking-[0.3em] uppercase shadow-lg shadow-gray-100 mt-8"
                                 >
-                                    Review Order Order Summary
+                                    {t('checkout.reviewOrder')}
                                 </button>
                             </div>
                         ) : (
                             <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                                <button
-                                    onClick={() => setCurrentStep('details')}
-                                    className="flex items-center text-gray-400 hover:text-amber-800 transition-colors font-inter text-[10px] tracking-widest uppercase mb-6"
-                                >
-                                    <FiChevronLeft className="mr-1" /> Back to details
+                                <button onClick={() => setCurrentStep('details')}
+                                    className="flex items-center text-gray-400 hover:text-amber-800 transition-colors font-inter text-[10px] tracking-widest uppercase mb-6">
+                                    <FiChevronLeft className="mr-1" /> {t('checkout.backToDetails')}
                                 </button>
 
                                 <div className="bg-gray-50/50 border border-gray-100 p-8 space-y-6">
-                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-200 pb-4">Verification</h2>
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-200 pb-4">{t('checkout.verification')}</h2>
                                     <div className="space-y-4 font-inter text-sm font-light text-gray-600">
                                         <div className="flex justify-between">
-                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">Recipient</span>
+                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">{t('checkout.recipient')}</span>
                                             <span>{formData.firstName} {formData.lastName}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">Contact</span>
+                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">{t('checkout.contact')}</span>
                                             <span>{formData.email}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">Method</span>
-                                            <span>{deliveryMethod === 'ship' ? 'Shipping' : 'Pickup'}</span>
+                                            <span className="text-gray-400 uppercase text-[10px] tracking-[0.2em]">{t('checkout.method')}</span>
+                                            <span>{deliveryMethod === 'ship' ? t('checkout.shippingMethod') : t('checkout.pickupMethod')}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="space-y-6">
-                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">Payment Methods</h2>
+                                    <h2 className="font-playfair text-xl text-gray-900 border-b border-gray-100 pb-4">{t('checkout.paymentMethods')}</h2>
                                     <div className="flex gap-6 items-center flex-wrap grayscale opacity-50">
                                         <Image src={Visa} alt="Visa" width={40} height={25} />
                                         <Image src={MasterCard} alt="Mastercard" width={40} height={25} />
@@ -448,16 +396,11 @@ const PublicationsCheckoutForm = () => {
                                         <Image src={AirtelTigo} alt="AirtelTigo" width={50} height={25} />
                                     </div>
 
-                                    <button
-                                        onClick={handlePayment}
-                                        disabled={isProcessing}
-                                        className="w-full py-5 bg-amber-800 text-white hover:bg-amber-900 disabled:bg-gray-200 transition-all duration-500 font-inter text-xs tracking-[0.3em] uppercase shadow-xl flex items-center justify-center gap-4"
-                                    >
-                                        {isProcessing ? 'Processing Transaction...' : (
-                                            <>
-                                                <FiLock className="w-4 h-4" />
-                                                Finalize Payment — {isLocationLoading ? '...' : getTotalDisplay()}
-                                            </>
+                                    <button onClick={handlePayment} disabled={isProcessing}
+                                        className="w-full py-5 bg-amber-800 text-white hover:bg-amber-900 disabled:bg-gray-200 transition-all duration-500 font-inter text-xs tracking-[0.3em] uppercase shadow-xl flex items-center justify-center gap-4">
+                                        {isProcessing ? t('checkout.processing') : (
+                                            <><FiLock className="w-4 h-4" />
+                                                {t('checkout.finalizePayment')} — {isLocationLoading ? '...' : getTotalDisplay()}</>
                                         )}
                                     </button>
                                 </div>
@@ -471,7 +414,7 @@ const PublicationsCheckoutForm = () => {
                             <div className="absolute top-0 right-0 w-8 h-[1px] bg-amber-800"></div>
                             <div className="absolute top-0 right-0 w-[1px] h-8 bg-amber-800"></div>
 
-                            <h2 className="font-playfair text-2xl text-gray-900 mb-8 border-b border-gray-50 pb-4">Your Selection</h2>
+                            <h2 className="font-playfair text-2xl text-gray-900 mb-8 border-b border-gray-50 pb-4">{t('checkout.yourSelection')}</h2>
 
                             <div className="space-y-8 mb-10 max-h-[400px] overflow-y-auto no-scrollbar">
                                 {cartItems.map((item) => (
@@ -492,7 +435,7 @@ const PublicationsCheckoutForm = () => {
 
                             <div className="space-y-4 pt-8 border-t border-gray-100">
                                 <div className="flex justify-between items-center">
-                                    <span className="font-inter text-[10px] tracking-[0.2em] uppercase text-gray-400">Subtotal</span>
+                                    <span className="font-inter text-[10px] tracking-[0.2em] uppercase text-gray-400">{t('cart.subtotal')}</span>
                                     <span className="font-inter text-sm text-gray-900">{isLocationLoading ? '...' : getTotalDisplay()}</span>
                                 </div>
                                 {deliveryMethod === 'ship' && userLocation?.pricing === 'ghana' && (
@@ -502,7 +445,7 @@ const PublicationsCheckoutForm = () => {
                                     </div>
                                 )}
                                 <div className="pt-6 flex justify-between items-baseline">
-                                    <span className="font-inter text-xs tracking-widest uppercase text-gray-900 font-bold">Total Amount</span>
+                                    <span className="font-inter text-xs tracking-widest uppercase text-gray-900 font-bold">{t('checkout.totalAmount')}</span>
                                     <span className="font-playfair text-3xl text-amber-800">
                                         {isLocationLoading ? '...' : formatCurrency(calculateTotal())}
                                     </span>
@@ -512,7 +455,7 @@ const PublicationsCheckoutForm = () => {
                             <div className="mt-8 flex items-center gap-3 p-4 bg-gray-50/50 border border-gray-100">
                                 <FiInfo className="text-amber-800 w-4 h-4 flex-shrink-0" />
                                 <p className="font-inter text-[9px] text-gray-500 leading-relaxed uppercase tracking-wider">
-                                    We will contact you within 24 hours to arrange delivery and confirm the shipping cost, which will be covered by you based on your preferred delivery option.
+                                    {t('checkout.securityNote')}
                                 </p>
                             </div>
                         </div>

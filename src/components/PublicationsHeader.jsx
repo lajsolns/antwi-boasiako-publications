@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FiShoppingBag, FiMenu, FiX, FiSearch } from 'react-icons/fi';
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 import PublicationsCartSidebar from './PublicationsCartSidebar';
 
 // Publications-specific cart button
@@ -37,6 +39,7 @@ export default function PublicationsHeader({
   rotatingQuotes
 }) {
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -122,19 +125,21 @@ export default function PublicationsHeader({
             </Link>
           </div>
 
-          {/* Right - Search and Cart (Mobile) */}
+          {/* Right - Search, Language and Cart (Mobile) */}
           <div className="lg:hidden absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 flex items-center gap-1 sm:gap-2">
-            <button className="p-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200">
+            <LanguageSwitcher />
+            {/* <button className="p-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200">
               <FiSearch className="w-5 h-5" />
-            </button>
+            </button> */}
             <PublicationsCartButton />
           </div>
 
-          {/* Desktop Search and Cart */}
+          {/* Desktop Search, Language and Cart */}
           <div className="hidden lg:flex items-center gap-2">
-            <button className="p-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200">
+            <LanguageSwitcher />
+            {/* <button className="p-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200">
               <FiSearch className="w-5 h-5" />
-            </button>
+            </button> */}
             <PublicationsCartButton />
           </div>
         </div>
@@ -169,13 +174,14 @@ export default function PublicationsHeader({
           <div className="h-[calc(100vh-80px)] overflow-y-auto px-8 py-12 flex flex-col justify-between">
             <nav className="flex flex-col items-center space-y-2">
               {[
-                { name: 'Home', href: '/publications' },
-                { name: 'All Books', href: '/publications/all-books' },
-                { name: 'Events', href: '/publications/events' },
-                { name: 'Author', href: '/publications/author' },
-                { name: 'Gallery', href: '/publications/gallery' },
-                { name: 'About', href: '/publications/about' },
-                { name: 'Contact Us', href: '/publications/contact' }
+                { name: t('nav.home'), href: '/publications' },
+                { name: t('nav.allBooks'), href: '/publications/all-books' },
+                { name: t('nav.events'), href: '/publications/events' },
+                { name: t('nav.author'), href: '/publications/author' },
+                { name: t('nav.gallery'), href: '/publications/gallery' },
+                { name: t('nav.about'), href: '/publications/about' },
+                { name: t('nav.contact'), href: '/publications/contact' },
+                { name: t('nav.csr'), href: '/publications/csr' }
               ].map((link, i) => (
                 <Link
                   key={link.href}
@@ -239,95 +245,26 @@ export default function PublicationsHeader({
             <div className="flex items-center justify-center h-12">
               {/* Desktop Navigation */}
               <div className="hidden lg:flex items-center space-x-8">
-                <Link
-                  href="/publications"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    Home
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/all-books"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/all-books' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    All Books
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/events"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/events' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    Events
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/author"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/author' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    Author
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/gallery"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/gallery' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    Gallery
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/about"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/about' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    About
-                  </span>
-                </Link>
-                <Link
-                  href="/publications/contact"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/contact' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    Contact Us
-                  </span>
-                </Link>
-                <div className="relative group">
-                  <button
-                    className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 flex items-center justify-center h-full group"
+                {[
+                  { key: 'nav.home', href: '/publications' },
+                  { key: 'nav.allBooks', href: '/publications/all-books' },
+                  { key: 'nav.events', href: '/publications/events' },
+                  { key: 'nav.author', href: '/publications/author' },
+                  { key: 'nav.gallery', href: '/publications/gallery' },
+                  { key: 'nav.about', href: '/publications/about' },
+                  { key: 'nav.contact', href: '/publications/contact' },
+                  { key: 'nav.csr', href: '/publications/csr' },
+                ].map(({ key, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
                   >
-                    <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${(pathname === '/publications/privacy-policy' || pathname === '/publications/shipping-policy') ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                      Policies
+                    <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === href ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
+                      {t(key)}
                     </span>
-                  </button>
-                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                    <div className="py-2 flex flex-col">
-                      <Link
-                        href="/publications/privacy-policy"
-                        className={`px-6 py-3 font-inter text-xs tracking-widest uppercase hover:bg-gray-50 hover:text-amber-800 transition-colors text-center ${pathname === '/publications/privacy-policy' ? 'text-amber-800 bg-gray-50' : 'text-gray-500'}`}
-                      >
-                        Privacy
-                      </Link>
-                      <Link
-                        href="/publications/shipping-policy"
-                        className={`px-6 py-3 font-inter text-xs tracking-widest uppercase hover:bg-gray-50 hover:text-amber-800 transition-colors text-center ${pathname === '/publications/shipping-policy' ? 'text-amber-800 bg-gray-50' : 'text-gray-500'}`}
-                      >
-                        Shipping
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <Link
-                  href="/publications/csr"
-                  className="font-inter text-[10px] tracking-[0.15em] uppercase text-gray-700 hover:text-amber-800 transition-colors duration-200 relative group"
-                >
-                  <span className={`relative after:content-[''] after:absolute after:h-[1px] after:bg-amber-800 after:left-0 after:-bottom-[1px] after:transition-all after:duration-300 group-hover:after:w-full ${pathname === '/publications/csr' ? 'after:w-full text-amber-800' : 'after:w-0'}`}>
-                    CSR
-                  </span>
-                </Link>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

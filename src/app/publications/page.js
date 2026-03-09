@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiSearch, FiShoppingBag, FiMenu, FiX, FiShare2, FiExternalLink, FiChevronUp } from 'react-icons/fi';
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
 import PublicationsHeader from '@/components/PublicationsHeader';
 import PublicationsFooter from '@/components/PublicationsFooter';
 import InstagramModal from '@/components/InstagramModal';
@@ -118,6 +119,7 @@ export default function PublicationsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   const { addToCart } = useCart();
+  const { t } = useLanguage();
 
   // Responsive effect for mobile detection
   useEffect(() => {
@@ -648,27 +650,27 @@ export default function PublicationsPage() {
           {/* Content */}
           <div className="relative z-10 max-w-4xl mx-auto text-center mt-12 pb-12">
             <span className="inline-block font-inter text-[10px] md:text-xs tracking-[0.4em] text-white/60 uppercase mb-8 animate-fade-in">
-              Establishing an Intellectual Legacy
+              {t('home.heroSuperheading')}
             </span>
             <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-normal text-white mb-10 animate-fade-in tracking-tight leading-[1.1]">
               Antwi-Boasiako <br className="hidden md:block" /> Publications
             </h1>
             <div className="w-16 h-[1px] bg-white/40 mx-auto mb-10 animate-fade-in"></div>
             <p className="font-playfair text-xl md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-12 animate-fade-in-delay italic font-light">
-              "Sharing the intellectual and professional works of Dr. Albert Antwi-Boasiako"
+              {t('home.heroQuote')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-delay">
               <Link
                 href="/publications/all-books"
                 className="px-10 py-4 bg-white text-gray-900 border border-white font-inter text-[10px] tracking-[0.2em] uppercase hover:bg-transparent hover:text-white transition-all duration-500"
               >
-                Browse Collection
+                {t('home.heroBrowse')}
               </Link>
               <Link
                 href="/publications/events"
                 className="px-10 py-4 bg-transparent text-white border border-white/40 font-inter text-[10px] tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-500"
               >
-                Forthcoming Works
+                {t('home.heroForthcoming')}
               </Link>
             </div>
           </div>
@@ -678,9 +680,9 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 bg-[#FAF9F6]">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Featured Title</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">{t('home.newReleaseSuperheading')}</span>
               <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
-                New Release
+                {t('home.newReleaseTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6"></div>
             </div>
@@ -708,17 +710,17 @@ export default function PublicationsPage() {
                   THE REPUBLIC
                 </h2>
                 <div className="font-merriweather text-base text-gray-600 italic mb-6">
-                  A professional journey, Ghana's cybersecurity & the making of a role model country.
+                  {t('home.theRepublicByline')}
                 </div>
 
                 <div className="space-y-1 mb-8">
                   <div className="font-inter text-base text-gray-900">
-                    <span className="text-gray-500 mr-2">International:</span> $35.00
+                    <span className="text-gray-500 mr-2">{t('home.international')}</span> $35.00
                   </div>
                   <div className="font-inter text-base text-gray-900">
-                    <span className="text-gray-500 mr-2">Ghana:</span> GHS 350
+                    <span className="text-gray-500 mr-2">{t('home.ghana')}</span> GHS 350
                   </div>
-                  <div className="font-inter text-xs text-gray-400 mt-1">VAT included</div>
+                  <div className="font-inter text-xs text-gray-400 mt-1">{t('home.vatIncluded')}</div>
                 </div>
                 {/* 
                <div className="font-inter text-sm text-gray-700 mb-4">
@@ -729,14 +731,14 @@ export default function PublicationsPage() {
               </div>  */}
 
                 <div className="mb-6">
-                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">Format</div>
+                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">{t('home.format')}</div>
                   <button type="button" className="px-5 py-2.5 bg-gray-900 text-white border border-gray-900 text-sm font-medium hover:bg-gray-800 transition-colors duration-200">
-                    Paperback
+                    {t('home.paperback')}
                   </button>
                 </div>
 
                 <div className="mb-8">
-                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">Quantity</div>
+                  <div className="font-inter text-xs tracking-wide text-gray-500 mb-2 uppercase">{t('home.quantity')}</div>
                   <div className="flex items-center border border-gray-300 w-32 bg-white">
                     <button
                       type="button"
@@ -794,17 +796,17 @@ export default function PublicationsPage() {
                     });
                   }}
                 >
-                  Add to Cart
+                  {t('home.addToCart')}
                 </button>
 
                 <div className="flex gap-4 mb-4">
                   <button className="flex-1 px-4 py-3 text-gray-600 border border-gray-300 font-inter text-xs tracking-wide uppercase hover:border-gray-900 hover:text-gray-900 transition-all duration-300 flex items-center justify-center gap-2">
                     <FiShare2 className="w-3.5 h-3.5" />
-                    Share
+                    {t('home.share')}
                   </button>
                   <button className="flex-1 px-4 py-3 text-gray-600 border border-gray-300 font-inter text-xs tracking-wide uppercase hover:border-gray-900 hover:text-gray-900 transition-all duration-300 flex items-center justify-center gap-2">
                     <FiExternalLink className="w-3.5 h-3.5" />
-                    Full Details
+                    {t('home.fullDetails')}
                   </button>
                 </div>
 
@@ -887,7 +889,7 @@ export default function PublicationsPage() {
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    Upcoming Event
+                    {t('home.upcomingEvent')}
                   </div>
 
                   <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
@@ -969,7 +971,7 @@ export default function PublicationsPage() {
                           </p>
 
                           <div className="mb-8">
-                            <h4 className="font-playfair text-2xl font-normal text-gray-900 mb-6">Event Details</h4>
+                            <h4 className="font-playfair text-2xl font-normal text-gray-900 mb-6">{t('home.eventDetails')}</h4>
                             <ul className="space-y-4">
                               {currentUpcomingEvent.highlights.map((highlight, index) => (
                                 <li key={index} className="flex items-start gap-4">
@@ -982,7 +984,7 @@ export default function PublicationsPage() {
                         </div>
 
                         <button className="w-full px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase hover:bg-transparent hover:text-gray-900 transition-all duration-300">
-                          Register to Attend
+                          {t('home.registerToAttend')}
                         </button>
                       </div>
                     </div>
@@ -1008,10 +1010,10 @@ export default function PublicationsPage() {
               <div>
                 <div className="text-center mb-12">
                   <h2 className="font-merriweather text-3xl font-bold text-gray-900 mb-4">
-                    Past Events
+                    {t('home.pastEvents')}
                   </h2>
                   <p className="font-inter text-gray-600 max-w-2xl mx-auto">
-                    Explore our previous events and conferences
+                    {t('home.pastEventsDesc')}
                   </p>
                 </div>
               </div>
@@ -1028,11 +1030,11 @@ export default function PublicationsPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Back to Upcoming Event
+                    {t('home.backToUpcoming')}
                   </>
                 ) : (
                   <>
-                    View Past Events
+                    {t('home.viewPastEvents')}
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -1092,14 +1094,13 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Community</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">{t('home.communitySuperheading')}</span>
               <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
-                Follow us on LinkedIn
+                {t('home.communityTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
               <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                Discover behind-the-scenes content, author interviews, and literary inspiration.
-                Join our community and stay connected with the latest from our publishing house.
+                {t('home.communityDesc')}
               </p>
             </div>
 
@@ -1326,7 +1327,7 @@ export default function PublicationsPage() {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
-                Connect on LinkedIn
+                {t('home.connectLinkedIn')}
                 <span className="w-8 h-[1px] bg-gray-400 group-hover:bg-amber-800 transition-colors duration-300"></span>
               </a>
             </div>
@@ -1337,13 +1338,13 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">In The Press</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">{t('home.pressSuperheading')}</span>
               <h2 className="font-playfair text-4xl font-normal text-gray-900 mb-4">
-                Recently Featured
+                {t('home.pressTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
               <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                Our books and authors have been recognized by leading publications and media outlets around the world.
+                {t('home.pressDesc')}
               </p>
             </div>
 
@@ -1423,13 +1424,13 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 bg-white border-t border-gray-100 relative">
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center mb-20 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Critical Acclaim</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">{t('home.testimonialsSuperheading')}</span>
               <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
-                Editorial Reviews
+                {t('home.testimonialsTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
               <p className="font-inter text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                Perspectives from leading voices on how our works are shaping cybersecurity dialogue globally.
+                {t('home.testimonialsDesc')}
               </p>
             </div>
 
@@ -1500,9 +1501,9 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 bg-[#FAF9F6]">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">Trusted Partners</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">{t('home.orgSuperheading')}</span>
               <h2 className="font-playfair text-3xl font-normal text-gray-900 mb-4">
-                Organizations We've Worked With
+                {t('home.orgTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6"></div>
             </div>
@@ -1523,13 +1524,13 @@ export default function PublicationsPage() {
         <section className="py-24 px-8 border-t border-gray-200 bg-white">
           <div className="max-w-4xl mx-auto border border-gray-200 p-12 md:p-16 text-center">
             <div className="mb-10 space-y-4">
-              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-amber-800 uppercase">The Dispatch</span>
+              <span className="font-inter text-xs font-semibold tracking-[0.2em] text-amber-800 uppercase">{t('home.newsletterSuperheading')}</span>
               <h2 className="font-playfair text-4xl md:text-5xl font-normal text-gray-900 mb-6">
-                Subscribe to Our Newsletter
+                {t('home.newsletterTitle')}
               </h2>
               <div className="w-16 h-[1px] bg-gray-300 mx-auto mt-6 mb-8"></div>
               <p className="font-inter text-base text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
-                Receive monthly updates on new releases, author interviews, and exclusive excerpts from our House Magazine directly to your inbox.
+                {t('home.newsletterDesc')}
               </p>
             </div>
 
@@ -1540,7 +1541,7 @@ export default function PublicationsPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
+                    placeholder={t('home.emailPlaceholder')}
                     className="flex-1 px-6 py-4 bg-gray-50 border border-gray-200 text-gray-900 font-inter text-sm placeholder-gray-400 focus:outline-none focus:border-gray-900 focus:ring-0 transition-colors duration-300"
                   />
                   <button
@@ -1551,10 +1552,10 @@ export default function PublicationsPage() {
                         setEmail('');
                       }
                     }}
-                    className="px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors duration-300"
+                    className="px-8 py-4 bg-gray-900 text-white border border-gray-900 font-inter text-sm tracking-widests uppercase hover:bg-gray-800 transition-colors duration-300"
                     aria-label="Subscribe to newsletter"
                   >
-                    Subscribe
+                    {t('home.subscribe')}
                   </button>
                 </div>
               </div>
@@ -1562,7 +1563,7 @@ export default function PublicationsPage() {
 
             <div className="text-center">
               <p className="font-inter text-sm text-gray-600 mb-4">
-                Follow us for daily literary inspiration
+                {t('home.followUs')}
               </p>
               <div className="flex justify-center gap-4">
                 <a href="#" className="w-10 h-10 bg-white  flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200">
